@@ -1,0 +1,76 @@
+@extends('layouts.admin_master')
+
+@section('content')
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Availability
+    </div>
+    <div class="card-body">
+        <div>
+            <h3>Minimum & Future booking lead time </h3>
+            <h5 class="mt-5">How much lead time do you need before a job can be scheduled online ? </h5>
+        </div>
+       
+        <form method="POST" action="{{ url('/insert-mobile') }}" enctype="multipart/form-data">
+            @csrf
+           
+            <div class="form-row">
+               
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control select">
+                            <option class="check1" value="1">1 hour</option>
+                            <option class="check2" value="2">2 hour</option>
+                            <option class="check3" value="3">3 hour</option>
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <h5>How far in advance can new jobs be scheduled online ? </h5>
+            <div class="form-row ">
+                <div class="col-md-3">
+                    <div class="form-group">
+                       
+                        <input class="form-control py-4" name="model" type="number" min="1"  required />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('.select').change(function(){
+            var leadtime = $('.select').find(":selected").val();
+            $.ajax({
+                url: 'timing_available.blade.php',
+                type: "POST",
+                async:true,
+                data: {"myData":leadtime} , 
+                dataType: 'html',
+                success: function(data) {
+                    $('.Hours').html(data);
+                }
+            });    
+        });
+        
+    
+    });
+    $(function () {
+      $.ajax({
+          url: 'timing_available.blade.php',
+          type: "get",
+          async:true,
+          data: {name: 'ccenter', value: 'Sales Department' } , 
+          dataType: 'html',
+          success: function(data) {
+              $('#employeeid').html(data);
+          }
+      });    
+    });
+        
+   
+</script>
+@endsection
