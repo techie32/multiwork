@@ -34,20 +34,16 @@ class MobileController extends Controller
      */
     public function store(Request $request)
     {
-        // $image = $request->image;
-        // $iname = $image->getClientOriginalName();
-        // $image->storeAs('public/images',$iname);
 
         $mobile = new Mobile_info();
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
         $mobile->price = $request->price;
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
-        // $mobile->image = $iname;
+ 
         $mobile->save();
-        // $mobile->toArray();/
     
-        return view('Admin.mobile_list',compact('mobile'));
+        return Redirect()->route('all-mobile');
     }
 
     /**
@@ -70,7 +66,7 @@ class MobileController extends Controller
     public function edit($id)
     {
         $mobile = Mobile_info::where('id' ,'=',$id)->first();
-        return view('admin.edit_mobile',compact('mobile'));
+        return view('Admin.edit_mobile',compact('mobile'));
     }
 
     /**
@@ -82,20 +78,12 @@ class MobileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $image = $request->image;
-        // $iname = $image->getClientOriginalName();
-        // $image->storeAs('public/images',$iname);
-
 
         $mobile = Mobile_info::find($id);
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
         $mobile->price = $request->price;
-        // $mobile->image = base64_encode(file_get_contents($request->file('image')->pat‌​h()));
-        $imagepath = $request->file('image');
-        // $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
-        $mobile->image = $request->price;
-        // $mobile->image = $iname;
+        $mobile->image =  base64_encode(file_get_contents($request->file('image')));
         if($mobile->save())
         {
             return redirect()->route("all-mobile");

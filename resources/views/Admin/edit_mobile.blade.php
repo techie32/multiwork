@@ -31,6 +31,15 @@
 
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputLastName">Price</label>
+                                        <input class="form-control py-4" name="price" type="number" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row ">
+                                <div class="col-md-5 m-auto">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label small mb-1">Mobile Pic</label>
                                         <input class="form-control" type="file" name="image" id="formFile" value="{{ $mobile->image}}"  required>

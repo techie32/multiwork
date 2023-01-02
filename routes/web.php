@@ -6,6 +6,7 @@ use App\Http\Controllers\mobilecontroller;
 use App\Http\Controllers\CouponCodeController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TimeAvailableController;
+use App\Http\Controllers\LeadTimeController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 
@@ -67,9 +68,9 @@ Route::post('update-coupon/{id}',[CouponCodeController::class,'update'])->name('
 Route::get('/booking-list',[BookingController::class,'Allbooking'])->middleware(['auth'])->name('all-booking');
 
 // timing manage 
-Route::get('/timing-availability', function () {
-    return view('Admin.time_sch');
-});
+// Route::get('/timing-availability', function () {
+//     return view('Admin.time_sch')->name('timing-availability');
+// });
 
 
 Route::get('/timing-manage', function () {
@@ -77,6 +78,11 @@ Route::get('/timing-manage', function () {
 });
 
 Route::post('/insert-timing',[TimeAvailableController::class,'store'])->middleware(['auth']);
-
+Route::get('/timing-availability',[TimeAvailableController::class,'index'])->middleware(['auth'])->name('timing-availability');
+Route::get('/timing-availability',[TimeAvailableController::class,'Timeshow'])->middleware(['auth'])->name('timing-availability');
 // cal
 Route::get('/cal-hour',[TimeAvailableController::class,'cal'])->middleware(['auth']);
+
+Route::post('/insert-leadtime',[LeadTimeController::class,'store'])->middleware(['auth']);
+Route::post('update-leadtime/{id}',[LeadTimeController::class,'update'])->name('leadtime.update');
+Route::get('/timing-manage',[LeadTimeController::class,'index'])->middleware(['auth'])->name('all-leadtime');

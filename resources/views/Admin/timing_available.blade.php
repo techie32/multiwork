@@ -156,7 +156,7 @@ const myFunc=(i)=>{
 let result = img_list.map((v, i) => `<div class='form-group' style='display:flex' >
                                         <div>
                                           <label class='switch'>
-                                            <input type='checkbox'  id="${i}"    class='timing_select' name='day_select_${i}' value='${v}'>
+                                            <input type='checkbox'  id="${i}"    class='timing_select' name='day_select[]' value='${v}'>
                                             <span class='slider round'></span>
                                           </label> 
                                             

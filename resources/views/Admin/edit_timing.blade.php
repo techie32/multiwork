@@ -12,7 +12,7 @@
             <h5 class="mt-5">How much lead time do you need before a job can be scheduled online ? </h5>
         </div>
        
-        <form method="POST" action="{{ url('/insert-leadtime') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{URL::to('update-leadtime/'.$leadtime->id)}}" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
                
@@ -38,11 +38,6 @@
             <div class="col-md-5 m-auto">
                 <div class="form-group text-center">
                     <button class="btn btn-primary  btn-default m-auto">Submit</button>
-                </div>
-            </div>
-            <div class="col-md-5 m-auto">
-                <div class="form-group text-center">
-                    <button class="btn btn-primary  btn-default m-auto">Update</button>
                 </div>
             </div>
         </form>

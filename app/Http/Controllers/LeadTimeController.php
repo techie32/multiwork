@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Couponcode;
-use Illuminate\Http\Request;
 
-class CouponCodeController extends Controller
+use Illuminate\Http\Request;
+use App\Models\LeadTime;
+class LeadTimeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,8 @@ class CouponCodeController extends Controller
      */
     public function index()
     {
-        return Couponcode::all();
+        $leadtime = LeadTime::all();
+        return view('Admin.timing_manage',compact('leadtime'));
     }
 
     /**
@@ -23,7 +24,7 @@ class CouponCodeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,11 +35,10 @@ class CouponCodeController extends Controller
      */
     public function store(Request $request)
     {
-        $coupon = new Couponcode();
-        $coupon->coupon_code = $request->coupon_code;
-        $coupon->amount = $request->amount;
-        $coupon->save();
-        return Redirect()->route('all-coupon');
+        $leadtime = new LeadTime();
+        $leadtime->lead_time = $request->leadtime;
+        $leadtime->save();
+        return Redirect()->route('all-leadtime');
     }
 
     /**
@@ -60,8 +60,7 @@ class CouponCodeController extends Controller
      */
     public function edit($id)
     {
-        $coupon = Couponcode::where('id' ,'=',$id)->first();
-        return view('admin.edit_coupon',compact('coupon'));
+        //
     }
 
     /**
@@ -73,20 +72,19 @@ class CouponCodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $coupon = Couponcode::find($id);
-        $coupon->coupon_code = $request->coupon_code;
-        $coupon->amount = $request->amount;
+        $leadtime = LeadTime::find($id);
+        $leadtime->lead_time = $request->leadtime;
     
-        if($coupon->save())
+        if($leadtime->save())
         {
-            return redirect()->route("all-coupon");
+            return redirect()->route("all-leadtime");
         }
         else
         {
             return redirect()->back()->with(['msg' => 2]);
         }
 
-        return view('coupon.edit',compact('coupon'));
+        return view('leadtime.edit',compact('leadtime'));
     }
 
     /**
@@ -99,23 +97,4 @@ class CouponCodeController extends Controller
     {
         //
     }
-    public function Allcouponcode()
-    {
-        $coupon = Couponcode::all();
-        return view('Admin.coupon_list',compact('coupon'));
-    }
-    public function delete($id)
-    {
-        $coupon =  Couponcode::find($id);
-        if($coupon->delete())
-        {
-            return redirect()->back()->with(['msg' => 1]);
-        }
-        else
-        {
-            return redirect()->back()->with(['msg' => 2]);
-        }
-
-    }
-    
 }
