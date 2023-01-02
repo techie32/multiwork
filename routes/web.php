@@ -39,11 +39,6 @@ require __DIR__.'/auth.php';
 
 
 
-
-
-
-
-
 // mobile 
 Route::get('/add-new-mobile', function () {
     return view('Admin.add_mobile');
@@ -67,21 +62,18 @@ Route::post('update-coupon/{id}',[CouponCodeController::class,'update'])->name('
 // booking 
 Route::get('/booking-list',[BookingController::class,'Allbooking'])->middleware(['auth'])->name('all-booking');
 
-// timing manage 
-// Route::get('/timing-availability', function () {
-//     return view('Admin.time_sch')->name('timing-availability');
-// });
+
 
 
 Route::get('/timing-manage', function () {
     return view('Admin.timing_manage');
 });
 
-Route::post('/insert-timing',[TimeAvailableController::class,'store'])->middleware(['auth']);
-Route::get('/timing-availability',[TimeAvailableController::class,'index'])->middleware(['auth'])->name('timing-availability');
+Route::post('/insert-timing',[TimeAvailableController::class,'update'])->middleware(['auth']);
+// Route::get('/timing-availability',[TimeAvailableController::class,'index'])->middleware(['auth'])->name('timing-availability');
 Route::get('/timing-availability',[TimeAvailableController::class,'Timeshow'])->middleware(['auth'])->name('timing-availability');
 // cal
-Route::get('/cal-hour',[TimeAvailableController::class,'cal'])->middleware(['auth']);
+Route::get('/cal-hour/{dayname}',[TimeAvailableController::class,'cal'])->middleware(['auth']);
 
 Route::post('/insert-leadtime',[LeadTimeController::class,'store'])->middleware(['auth']);
 Route::post('update-leadtime/{id}',[LeadTimeController::class,'update'])->name('leadtime.update');

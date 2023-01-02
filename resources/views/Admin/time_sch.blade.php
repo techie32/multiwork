@@ -135,6 +135,7 @@ input:checked + .slider:before {
                         <td>{{ $row->day_name }}</td>
                         <td>{{ $row->start_time }}</td>
                         <td>{{ $row->end_time }}</td>
+                        <td>{{ $row->end_time }}</td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -146,51 +147,41 @@ input:checked + .slider:before {
    
 </div>
 
+
 <script>
-const img_list = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday',  'Saturday'];
-
-const myFunc=(i)=>{
-  // const id =  document.getElementById(i);
-  // const divid =  document.getElementById(i);
-  // id.onclick = function(){
-  //     if(divid.style.display == "none"){
-
-  //       document.getElementById(i).style.display = "block";
-  //     }
-  //     else{
-  //       document.getElementById(i).style.display = "none";
-  //     }
-  // }
-  if(i>=0){
-    document.getElementById(i).style.display = "block"; 
-  }else{
-    document.getElementById(i).style.display = "none"; 
-  }
- 
-
-  // var x = document.getElementById(i);
-  // alert(x);
-  // if (x.style.display === "none") {
-  //   x.style.display = "block";
-  //   x.style.background = "black";
-  // } else {
-  //   x.style.display = "none";
-  // }
+window.addEventListener('load', function () {
+  // alert('{!! json_encode($timing) !!}')
+  const timing = {!! json_encode($timing) !!}
+  timing.forEach((item, i)=>{
+    console.log({item});
+    if( item.active === "1"){
+      document.getElementById(i).checked =true
+      document.getElementById(`${i}-range-picker`).style.display = 'block'
+    }else{
+      document.getElementById(`${i}-range-picker`).style.display = 'none'
+    }
+  })
   
-  
-}
+})
+
+  // {{$timing}}.map((item)=>console.log({item}))
+  const timing = {!! json_encode($timing) !!}
+  const img_list = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday',  'Saturday'];
+  console.log(timing);
 
 
-let result = img_list.map((v, i) => `<div class='form-group' style='display:flex' >
+let result = timing.map((v, i) => `<div class='form-group' style='display:flex' >
                                         <div>
                                           <label class='switch'>
-                                            <input type='checkbox'  id="${i}"    class='timing_select' name='day_select[]' value='${v}'>
+                                            <input type='hidden'     class='timing_select' name='id[]' value='${v.id}'>
+                                            
+                                            <input type='checkbox'  id="${i}"  class='timing_select' name='${i}' value='1'>
                                             <span class='slider round'></span>
                                           </label> 
                                             
                                         </div>
                                         <div class='div_size' >
-                                          <h3 style='margin-left:30px;font-size:20px'>${v}</span>
+                                          <h3 style='margin-left:30px;font-size:20px'>${v.day_name}</span>
                                         </div>
                                         
                                         <div   class='show_time' id="${i}-range-picker" style="display:none">
@@ -198,11 +189,11 @@ let result = img_list.map((v, i) => `<div class='form-group' style='display:flex
                                             <div id='range'></div>
                                             <label>
                                                 Start
-                                                <input id='start_time' type='time' name='start_time[]' mbsc-input placeholder='Please select...' />
+                                                <input value='${v.start_time}' id='start_time' type='time' name='start_time[]' mbsc-input placeholder='Please select...' />
                                             </label>  
                                             <label>
                                                 End
-                                                <input id='end_time'   type='time' name='end_time[]'   mbsc-input placeholder='Please select...' />
+                                                <input value='${v.end_time}' id='end_time'   type='time' name='end_time[]'   mbsc-input placeholder='Please select...' />
                                             </label>
                                             </div>
                                         </div>
@@ -216,8 +207,6 @@ document.getElementById('outer').innerHTML = result;
     if($(this).is(":checked")){
         var id = $($(this)).attr("id");
         $(`#${id}-range-picker`).show(); 
-        // $test = $("#start_time").val();
-        // alert($test);
     }else if(!($(this).is(":checked"))){
         var id = $($(this)).attr("id");
         $(`#${id}-range-picker`).hide(); 
@@ -227,26 +216,6 @@ document.getElementById('outer').innerHTML = result;
 
   
 
-  
-  // $('.timing_select').each(function(){
-  //   $(this).click(function(){
-  //     if($(this).is(":checked")){
-  //       var id = $($(this)).attr("id");
-  //       $(`#${id}-range-picker`).show(); 
-  //     }else if(!($(this).is(":checked"))){
-  //       var id = $($(this)).attr("id");
-  //       $(`#${id}-range-picker`).hide(); 
-  //     }
-  //   });
-  // })
-
-  // $('#range').mobiscroll().datepicker({
-  //   controls: ['time'],
-  //   select: 'range',
-  //   startInput: '#start',
-  //   endInput: '#end',
-  //   touchUi: true
-  // });
 </script>
 
 @endsection

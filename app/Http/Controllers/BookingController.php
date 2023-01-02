@@ -34,27 +34,27 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'zip_code' => 'required',
-            'service_type' => 'required',
-            'model' => 'required',
-            'device_issue_name' => 'required',
-            'device_issue_description' => 'required',
-            'screen_color' => 'required',
-            'warrenty' => 'required',
-            'screen_protector' => 'required',
-            'charger_cable' => 'required',
-            'date' => 'required',
-            'time' => 'required',
-            'address' => 'required',
-            'unit_floor' => 'required',
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'total_price' => 'required',
+        // $request->validate([
+        //     'name' => 'required',
+        //     'zip_code' => 'required',
+        //     'service_type' => 'required',
+        //     'model' => 'required',
+        //     'device_issue_name' => 'required',
+        //     'device_issue_description' => 'required',
+        //     'screen_color' => 'required',
+        //     'warrenty' => 'required',
+        //     'screen_protector' => 'required',
+        //     'charger_cable' => 'required',
+        //     'date' => 'required',
+        //     'time' => 'required',
+        //     'address' => 'required',
+        //     'unit_floor' => 'required',
+        //     'phone' => 'required',
+        //     'email' => 'required',
+        //     'total_price' => 'required',
             
-        ]);
+        // ]);
+
         return Booking::create($request->all());
     }
 

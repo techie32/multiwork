@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MobileController;
 use App\Http\Controllers\CouponCodeController;
+use App\Http\Controllers\TimeAvailableController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,4 +34,5 @@ Route::post('/mobileinfo',[MobileController::class,'store']);
 
 Route::get('/couponcode',[CouponCodeController::class,'index']);
 
-// Route::get('/booking',[BookingController::class,'index']);
+
+Route::get('/timing-slot/{dayname}',[TimeAvailableController::class,'cal']);

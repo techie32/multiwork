@@ -16,7 +16,7 @@ class TimeAvailableController extends Controller
     public function index()
     {
         return view('Admin.time_sch');
-        // return Redirect()->route('timing-availability');
+
     }
 
     /**
@@ -37,85 +37,8 @@ class TimeAvailableController extends Controller
      */
     public function store(Request $request)
     {
-    
-        // $s_time = Carbon::parse($request->start_time)->format('H:i');
-        // $e_time = Carbon::parse($request->end_time)->format('H:i');
-        // dd($request,$s_time,$e_time);
-    
-        // dd($days);
-        // $now = date('Y-m-d H:i');
-        // $now = $request->timing_select;
-
-        // $timing = $request->start_time;
-        // dd($timing);
-    
-        // dd(gettype($timing));
-        // $s_time =Carbon::parse($request->start_time)->format('G-i');
-    
-        // $e_time=Carbon::parse($request->end_time)->format('yy-m-d');
-        // dd($s_time,$e_time);
-        // $serializedArr = serialize($days);
-        // dd()
-        // $serializedArr->save();
-        // dd($serializedArr);
-        // foreach($days as $key=>$row){
-        //     $data=([
-        //         'week_name' => $days[$key],
-        //         'week_name' => $days[$key]
-        //     ]);
-        //     dd($data);
-        // }
-        // $serializedArr = serialize($days);
-        // $serializedArr = new time_available();
-        // $serializedArr->save();
-        // $data;
-
-
-
-      
-        // $stime[] = $request->start_time;
-        // dd($stime);
-        // dd($days,$stime);
-        // $start = Carbon::parse($request->start_time)->format('H:i');
-        // $end = Carbon::parse($request->end_time)->format('H:i');
-
-        // $starttime = Carbon::parse($request->start_time);
-        // $endtime = Carbon::parse($request->end_time);
-
-        // $s_time =  Format("G-i", strtotime($request->start_time));
-        // $s_time =Carbon::parse($request->start_time)->format('H:i');
-        // $e_time = date("Y-m-d", strtotime($request->end_time));
-        // $e_time =Carbon::parse($request->end_time)->format('H:i');
-
-        // $
-        
-       
-        // $collection = collect([$request->start_time]);
-        // // dd($collection);
-        // // dd($collection);\
-        // $value = $request->start_time;
-        // foreach($value as $key){
-        //     $collection->filter(function($value, $key) {
-        //         return  $value != null;
-        //     });
-        // };
-        // dd($collection);
-        // $stime = 
-        
-        // $end_time = $request->end_time;
-        // foreach($request as $key =>$value){
-        //     $document = new time_available(array(
-        //         'day_name'=> $request->day_select,
-        //         'start_time' => $request->start_time,
-        //         'end_time' => $request->end_time
-        //     ));
-            
-        //     dd($document);
-        //     $document->save();
-            
-        //     $documents[] = $document;
-        // }
         $days = $request->day_select;
+       
         $s_time = $request->start_time;
         $e_time = $request->end_time;
         $s_value = array_values(array_filter($s_time));
@@ -133,10 +56,7 @@ class TimeAvailableController extends Controller
             $document->save();
             $documents[] = $document;
         }
-        // dd($document);
-
-       
-        // return view('Admin.time_sch');
+  
     
         return Redirect()->route('timing-availability');
     
@@ -171,9 +91,40 @@ class TimeAvailableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $day  = $request->id;
+
+        $day_s = $request->day_select;
+        
+        $stime = $request->start_time;
+        
+        $etime = $request->end_time;
+        
+      
+        $s_value = array_values(array_filter($stime));
+        
+        $e_value = array_values(array_filter($etime));
+       
+        foreach($day as $key =>$value){
+    
+            $check = $request->input($key);
+     
+
+            if($check == '1'){
+                   $check = 1;
+            }
+            else{
+                $check = 0;
+            };
+                  
+            $timing = time_available::where('id', '=' , $value)
+            ->update(['start_time' =>$s_value[$key],'end_time' => $e_value[$key],'active' => $check]);
+            
+        }
+        return Redirect()->route('timing-availability');
+       
+
     }
 
     /**
@@ -187,46 +138,26 @@ class TimeAvailableController extends Controller
         //
     }
 
-    public function cal(){
-        // $to = Carbon::createFromFormat('H:s', '9:30');
-        // $from = Carbon::createFromFormat('H:s', '11:30');
-        // $diff_in_hours = $to->diffInHours($from);
-        // dd($diff_in_hours);
-
+    public function cal($dayname){
+      
+    
         $s = time_available::select('start_time')->first();
         $e = time_available::select('end_time')->first();
-        $s= "Monday";
+      
+  
+            $att = DB::table('time_available')
+                    ->select('*')
+                    ->where('day_name','=', $dayname)
+                    ->get();
+            
+            $period = new CarbonPeriod($att[0]->start_time, '1 hour', $att[0]->end_time); // for create use 24 hours format later change format 
+            $slots = [];
+            foreach($period as $item){
+                array_push($slots,$item->format("h:i A"));
+            }
 
-        $att = DB::table('time_available')
-                ->select('*')
-                ->where('day_name','=', 'Monday')
-                ->get();
-        // dd($att[0]->start_time,);
-        // dd();
-        $period = new CarbonPeriod($att[0]->start_time, '1 hour', $att[0]->end_time); // for create use 24 hours format later change format 
-        $slots = [];
-        foreach($period as $item){
-            array_push($slots,$item->format("h:i A"));
-        }
-
-        return $slots;  
-        dd($slots);    
-
-        // $test1 = Carbon::createFromFormat('H:s',$e);
-        // $test2 = Carbon::createFromFormat('H:s',$e);
-        // dd($test1,$test2);
-
-        // $t = Carbon::parse($data)->format('H:i');
-        // dd($t);
-        // dd($data);
-        foreach($data as $key => $value)
-        {
-            $to = Carbon::createFromFormat('H:s', $value);
-            dd($to);
-            $from = Carbon::createFromFormat('H:s',$value);
-            $diff_in_hours = $to->diffInHours($from);
-            dd($diff_in_hours);
-        }
+            return $slots;  
+        
        
     }
     public function TimeShow(){

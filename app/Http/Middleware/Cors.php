@@ -17,9 +17,16 @@ class Cors
     public function handle(Request $request, Closure $next)
     {
         
-        return $next($request)
-        ->header('Access-Control-Allow-Origin', '*')
-        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-        ->header('Access-Control-Allow-Headers', 'Accept,Authorization,Content-Types');
+        $allowedOrigins = ['madmin.asrasoft.net'];
+        $origin = $_SERVER['*'];
+
+        if (in_array($origin, $allowedOrigins)) {
+            return $next($request)
+                ->header('Access-Control-Allow-Origin', '*')
+                ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+                ->header('Access-Control-Allow-Headers', 'Content-Type');
+        }
+
+        return $next($request);
     }
 }
