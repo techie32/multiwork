@@ -19,7 +19,12 @@ use App\Http\Controllers\TimeAvailableController;
 Route::get('/booking',[BookingController::class,'index']);
 
 Route::get('/booking/{id}',[BookingController::class,'show']);
-Route::post('/booking',[BookingController::class,'store']);
+// Route::post('/booking',[BookingController::class,'store']);
+
+Route::middleware(['cors'])->group(function () {
+    Route::post('/booking',[BookingController::class,'store']);
+});
+
 // Route::delete('/booking/{id}',[BookingController::class,'destroy']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -36,3 +41,4 @@ Route::get('/couponcode',[CouponCodeController::class,'index']);
 
 
 Route::get('/timing-slot/{dayname}',[TimeAvailableController::class,'cal']);
+Route::get('/timing-days',[TimeAvailableController::class,'dayslot']);
