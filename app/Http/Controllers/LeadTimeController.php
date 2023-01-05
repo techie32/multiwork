@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use App\Models\LeadTime;
 class LeadTimeController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -35,9 +37,14 @@ class LeadTimeController extends Controller
      */
     public function store(Request $request)
     {
-        $leadtime = new LeadTime();
-        $leadtime->lead_time = $request->leadtime;
-        $leadtime->save();
+      
+        $results = $request->leadtime;
+        
+        $result = DB::table('time_setting')
+        ->updateOrInsert([
+                'lead_time' => $results
+                 ]);
+            
         return Redirect()->route('all-leadtime');
     }
 

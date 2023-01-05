@@ -75,7 +75,7 @@ Route::get('/timing-availability',[TimeAvailableController::class,'Timeshow'])->
 // cal
 Route::get('/cal-hour/{dayname}',[TimeAvailableController::class,'cal'])->middleware(['auth']);
 
-Route::post('/insert-leadtime',[LeadTimeController::class,'store'])->middleware(['auth']);
+Route::post('/insert-leadtime/{id}',[LeadTimeController::class,'store'])->middleware(['auth']);
 Route::post('update-leadtime/{id}',[LeadTimeController::class,'update'])->name('leadtime.update');
 Route::get('/timing-manage',[LeadTimeController::class,'index'])->middleware(['auth'])->name('all-leadtime');
 

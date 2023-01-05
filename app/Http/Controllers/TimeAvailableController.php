@@ -139,90 +139,52 @@ class TimeAvailableController extends Controller
         //
     }
 
-    public function cal($dayname){
+    public function cal($givendate){
+
         $weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         $dateValue= "2023/01/01";
         $day = date('l', strtotime($dateValue));
-
-        // $availableDays = ["mon", "tues", "fri", "sun"];
+      
         $availableDays = DB::table('time_available')
                 ->select('*')
                 ->where('active','=',1)
                 ->get();
 
-        // $slots = ["01:00", "10:00"];
-        $period = new CarbonPeriod($availableDays[0]->start_time, '1 hour', $availableDays[0]->end_time); // for create use 24 hours format later change format 
+        $daysInAvailableDays = [];
+        foreach($availableDays as $key => $value){
+            $daysInAvailableDays[] = $value->day_name;
+        }
+        $l = $givendate;
+        $leadtime = '1 hour';
+        $date =  new Carbon($l);
 
-        $slots = [];
-        $days_name = [];
-        foreach($period as $item){
-            array_push($slots,$item->format("h:i A"));
-        } 
-        return $slots;
-        dd($slots);
-        $date = new DateTime();
         $daysWithSlots = [];
+        while (count($daysWithSlots) < 7) {
+            $date->modify('+1 day');
+          
+            if (in_array($weekDays[$date->format('w')], $daysInAvailableDays)) {
 
-        while (count($daysWithSlots) < 8) {
-        $date->modify('+1 day');
+                $specificDay = '';
+                foreach($availableDays as $key => $value){
+                    if($value->day_name == $weekDays[$date->format('w')] ){
+                        $specificDay = $value;
+                    }
+                }
+                    $period = new CarbonPeriod($specificDay->start_time, $leadtime, $specificDay->end_time); 
+                    $slots = [];
+                    foreach($period as $item){
+                        array_push($slots,$item->format("h:i A"));
+                    } 
 
-        if (in_array($weekDays[$date->format('w')], $availableDays)) {
-            $daysWithSlots[] = [
-            'date' => $date->format('j'),
-            'slots' => $slots,
-            'dayName' => $weekDays[$date->format('w')],
-            ];
+                $daysWithSlots[] = [
+                  'date' => $date->format('j'),
+                  'slots' => $slots,
+                  'dayName' => $weekDays[$date->format('w')],
+                ];
+            }
         }
-        }
-
-        dd(json_encode($daysWithSlots));
-
-        // $weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        // $dateValue= "2023/01/01";
-        // $day = date('l', strtotime($dateValue));
-        // $availableDays = DB::table('time_available')
-        //         ->select('*')
-    
-        //         ->where('active','=',1)
-        //         ->get();
-
-        // $daysWithSlots=[1,2,4];
-        // $arrLength = count($daysWithSlots);
- 
-        while($arrLength < 8){
-            // $newdate = new Carbon($dateValue.Carbon::now((($dateValue.getDate() + array(1)))));
-            $newdate = date('Y-m-d', strtotime('+1 day', strtotime($dateValue)));
-
-            if($availableDays.inarray($weekDays[$date.getDay()])) {
-
-                /**
-                 * $dayName = $weekDays[$date->format('w')];
-                 * $specificDay = availableDays.find((item)=>item.dayName === $dayName);
-                 * $period = new CarbonPeriod($specificDay->start_time, '1 hour', $specificDay->end_time); // for create use 24 hours format later change format 
-                 */
-
-                dd($availableDays);
-                // $daysWithSlots.array_push(
-                // date: $date.getDate();
-                //   slots,
-                //   dayName: weekDays[date.getDay()],
-                // );
-              }
-        }
-            
-        $period = new CarbonPeriod($availableDays[0]->start_time, '1 hour', $availableDays[0]->end_time); // for create use 24 hours format later change format 
-
-        $slots = [];
-        $days_name = [];
-        foreach($period as $item){
-            array_push($slots,$item->format("h:i A"));
-            array_push($days_name,$day);
-    
-        }
-        // dd($days_name);  
-        return $slots;
-        return $days_name;  
-    
+        // dd($daysWithSlots);
+        return $daysWithSlots;
        
     }
     public function TimeShow(){

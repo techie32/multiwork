@@ -40,5 +40,5 @@ Route::post('/mobileinfo',[MobileController::class,'store']);
 Route::get('/couponcode',[CouponCodeController::class,'index']);
 
 
-Route::get('/timing-slot/{dayname}',[TimeAvailableController::class,'cal']);
+Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'cal']);
 Route::get('/timing-days',[TimeAvailableController::class,'dayslot']);

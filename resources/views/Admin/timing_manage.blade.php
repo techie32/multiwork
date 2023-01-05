@@ -12,16 +12,15 @@
             <h5 class="mt-5">How much lead time do you need before a job can be scheduled online ? </h5>
         </div>
        
-        <form method="POST" action="{{ url('/insert-leadtime') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('/insert-leadtime/'.$leadtime->id) }}" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
-               
                 <div class="col-md-3">
                     <div class="form-group">
                         <select class="form-control select" name="leadtime">
-                            <option class="check1" value="1">1 hour</option>
-                            <option class="check2" value="2">2 hour</option>
-                            <option class="check3" value="3">3 hour</option>
+                            <option class="check1" value="1 hour">1 hour</option>
+                            <option class="check2" value="2 hour">2 hour</option>
+                            <option class="check3" value="3 hour">3 hour</option>
                         </select>
                     </div>
                 </div>
@@ -31,7 +30,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                        
-                        <input class="form-control py-4" name="model" type="number" min="1"  required />
+                        <input class="form-control py-4" name="model" type="number" min="1"   />
                     </div>
                 </div>
             </div>
