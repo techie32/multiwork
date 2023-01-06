@@ -16,7 +16,16 @@ class LeadTimeController extends Controller
     public function index()
     {
         $leadtime = LeadTime::all();
+        // dd($leadtime);
         return view('Admin.timing_manage',compact('leadtime'));
+        // $leadtime = LeadTime::all();
+        // $result = [];
+        // foreach($leadtime as $value){
+        //     $result = $value;
+        // }
+       
+        
+        // return view('Admin.timing_manage',compact('result'));
     }
 
     /**
@@ -38,14 +47,14 @@ class LeadTimeController extends Controller
     public function store(Request $request)
     {
       
-        $results = $request->leadtime;
+        // $results = $request->leadtime;
         
-        $result = DB::table('time_setting')
-        ->updateOrInsert([
-                'lead_time' => $results
-                 ]);
+        // $result = DB::table('time_setting')
+        // ->updateOrInsert([
+        //         'lead_time' => $results
+        //          ]);
             
-        return Redirect()->route('all-leadtime');
+        // return Redirect()->route('all-leadtime');
     }
 
     /**
@@ -79,19 +88,9 @@ class LeadTimeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $leadtime = LeadTime::find($id);
-        $leadtime->lead_time = $request->leadtime;
-    
-        if($leadtime->save())
-        {
-            return redirect()->route("all-leadtime");
-        }
-        else
-        {
-            return redirect()->back()->with(['msg' => 2]);
-        }
-
-        return view('leadtime.edit',compact('leadtime'));
+        $timing = LeadTime::where('id', '=' , $id)
+            ->update(['lead_time' =>$request->leadtime]);
+        return Redirect()->route('all-leadtime');
     }
 
     /**

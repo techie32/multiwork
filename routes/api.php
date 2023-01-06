@@ -19,7 +19,7 @@ use App\Http\Controllers\TimeAvailableController;
 Route::get('/booking',[BookingController::class,'index']);
 
 Route::get('/booking/{id}',[BookingController::class,'show']);
-// Route::post('/booking',[BookingController::class,'store']);
+
 
 Route::middleware(['cors'])->group(function () {
     Route::post('/booking',[BookingController::class,'store']);
@@ -32,13 +32,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/mobileinfo',[MobileController::class,'index']);
-
 Route::get('/mobileinfo/{id}',[MobileController::class,'show']);
 Route::post('/mobileinfo',[MobileController::class,'store']);
 
 
 Route::get('/couponcode',[CouponCodeController::class,'index']);
 
+Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
+Route::get('/timing-slot-pre/{givendate}',[TimeAvailableController::class,'calculatepreviousslot']);
 
-Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'cal']);
-Route::get('/timing-days',[TimeAvailableController::class,'dayslot']);

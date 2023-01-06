@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use DB;
 use Carbon\CarbonPeriod;
 use DateTime;
+use App\Models\LeadTime;
+
 class TimeAvailableController extends Controller
 {
     /**
@@ -123,7 +125,7 @@ class TimeAvailableController extends Controller
             ->update(['start_time' =>$s_value[$key],'end_time' => $e_value[$key],'active' => $check]);
             
         }
-        return Redirect()->route('timing-availability');
+        return Redirect()->route('all-leadtime');
        
 
     }
@@ -139,11 +141,11 @@ class TimeAvailableController extends Controller
         //
     }
 
-    public function cal($givendate){
+    public function calculatenextslot($givendate){
 
         $weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        $dateValue= "2023/01/01";
-        $day = date('l', strtotime($dateValue));
+        // $dateValue= "2023/01/01";
+        // $day = date('l', strtotime($dateValue));
       
         $availableDays = DB::table('time_available')
                 ->select('*')
@@ -154,9 +156,12 @@ class TimeAvailableController extends Controller
         foreach($availableDays as $key => $value){
             $daysInAvailableDays[] = $value->day_name;
         }
+
         $l = $givendate;
-        $leadtime = '1 hour';
         $date =  new Carbon($l);
+
+        $leadtime = LeadTime::get();
+        $leadtimevalue = $leadtime[0]->lead_time;
 
         $daysWithSlots = [];
         while (count($daysWithSlots) < 7) {
@@ -170,14 +175,14 @@ class TimeAvailableController extends Controller
                         $specificDay = $value;
                     }
                 }
-                    $period = new CarbonPeriod($specificDay->start_time, $leadtime, $specificDay->end_time); 
+                    $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
                     $slots = [];
                     foreach($period as $item){
                         array_push($slots,$item->format("h:i A"));
                     } 
 
                 $daysWithSlots[] = [
-                  'date' => $date->format('j'),
+                  'date' => $date->format('Y-m-d'),
                   'slots' => $slots,
                   'dayName' => $weekDays[$date->format('w')],
                 ];
@@ -187,53 +192,62 @@ class TimeAvailableController extends Controller
         return $daysWithSlots;
        
     }
+
+    public function calculatepreviousslot($givendate){
+
+        $weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      
+        $availableDays = DB::table('time_available')
+                ->select('*')
+                ->where('active','=',1)
+                ->get();
+
+        $daysInAvailableDays = [];
+        foreach($availableDays as $key => $value){
+            $daysInAvailableDays[] = $value->day_name;
+        }
+
+        $l = $givendate;
+        $date =  new Carbon($l);
+
+        $leadtime = LeadTime::get();
+        $leadtimevalue = $leadtime[0]->lead_time;
+
+        $daysWithSlots = [];
+        while (count($daysWithSlots) < 7) {
+            $date->modify('-1 day');
+            if (in_array($weekDays[$date->format('w')], $daysInAvailableDays)) {
+
+                $specificDay = '';
+                foreach($availableDays as $key => $value){
+                    if($value->day_name == $weekDays[$date->format('w')] ){
+                        $specificDay = $value;
+                    }
+                }
+                    $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
+                    $slots = [];
+                    foreach($period as $item){
+                        array_push($slots,$item->format("h:i A"));
+                    } 
+
+                $daysWithSlots[] = [
+                  'date' => $date->format('Y-m-d'),
+                  'slots' => $slots,
+                  'dayName' => $weekDays[$date->format('w')],
+                ];
+            }
+        }
+            
+        
+        return $daysWithSlots;
+       
+    }
+
     public function TimeShow(){
         $timing = time_available::all();
         return view('Admin.time_sch',compact('timing'));
     }
 
-    public function dayslot(){
-        
-        // $weekDays = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"];      
-        // // $availableDays = ["mon", "tues", "fri", "sun"];
-        // $availableDays = ["mon", "tues", "fri", "sun"];
-        // $slots = ["01:00", "10:00"];
-
-        // $date = Carbon::now();
-        // $daysWithSlots = [];
-
-        // while (count($daysWithSlots) < 8) {
-        //     // dd('he');
-        //   $date = new Carbon($date.carbon::setDate($date.getDate() + 1));
-        //   if ($availableDays.includes($weekDays[$date.getDay()])) {
-        //     $daysWithSlots.push(
-            
-        //         // date: date.getDate(),
-        //       $slots,
-        //       dayName: $weekDays[date.getDay()],
-        //     );
-        //   }
-        // }
-        // dd($daysWithSlots)  ;
-
-        // 7 days fetch 
-        // $date = date('Y-m-d'); //today date
-        // $weekOfdays = array();
-        // for($i =1; $i <= 7; $i++){
-        //   $date = date('Y-m-d', strtotime('+1 day', strtotime($date)));
-        //   $weekOfdays[] = date('l : Y-m-d', strtotime($date));
-        // }
-        // // print_r($weekOfdays);
-       
-        // echo '<br>';
-        // echo '<p>Next 7 days from the current date are as shown below</p>';
-       
-        // foreach($weekOfdays as $days){
-       
-        //     echo $days.'<br>';
-        // }
-        $dateValue= "2015/07/15";
-       
-    }
+   
 
 }
