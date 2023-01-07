@@ -74,7 +74,7 @@
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsecoupon" aria-expanded="false" aria-controls="collapsecoupon">
-                                <div class="sb-nav-link-icon"><i class="fas fa-mobile"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                                Coupon Code
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -85,7 +85,7 @@
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsebooking" aria-expanded="false" aria-controls="collapsebooking">
-                                <div class="sb-nav-link-icon"><i class="fas fa-mobile"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
                                 Booking Menu
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -96,7 +96,7 @@
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseschedule" aria-expanded="false" aria-controls="collapseschedule">
-                                <div class="sb-nav-link-icon"><i class="fas fa-mobile"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
                                 Time Schedule
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>

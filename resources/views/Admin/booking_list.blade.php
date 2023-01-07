@@ -49,9 +49,6 @@
                         <td>{{ $row->phone }}</td>
                         <td>{{ $row->email }}</td>
                         <td>{{ $row->total_price }}</td>
-                        <td>
-                            
-                        </td>
                     </tr>
                     @endforeach
                     
