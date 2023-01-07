@@ -18,14 +18,7 @@ class LeadTimeController extends Controller
         $leadtime = LeadTime::all();
         // dd($leadtime);
         return view('Admin.timing_manage',compact('leadtime'));
-        // $leadtime = LeadTime::all();
-        // $result = [];
-        // foreach($leadtime as $value){
-        //     $result = $value;
-        // }
        
-        
-        // return view('Admin.timing_manage',compact('result'));
     }
 
     /**
@@ -47,14 +40,7 @@ class LeadTimeController extends Controller
     public function store(Request $request)
     {
       
-        // $results = $request->leadtime;
-        
-        // $result = DB::table('time_setting')
-        // ->updateOrInsert([
-        //         'lead_time' => $results
-        //          ]);
-            
-        // return Redirect()->route('all-leadtime');
+      
     }
 
     /**

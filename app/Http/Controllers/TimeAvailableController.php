@@ -125,7 +125,7 @@ class TimeAvailableController extends Controller
             ->update(['start_time' =>$s_value[$key],'end_time' => $e_value[$key],'active' => $check]);
             
         }
-        return Redirect()->route('all-leadtime');
+        return Redirect()->route('timing-availability');
        
 
     }
@@ -144,9 +144,7 @@ class TimeAvailableController extends Controller
     public function calculatenextslot($givendate){
 
         $weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        // $dateValue= "2023/01/01";
-        // $day = date('l', strtotime($dateValue));
-      
+
         $availableDays = DB::table('time_available')
                 ->select('*')
                 ->where('active','=',1)
@@ -188,7 +186,6 @@ class TimeAvailableController extends Controller
                 ];
             }
         }
-        // dd($daysWithSlots);
         return $daysWithSlots;
        
     }
@@ -237,8 +234,6 @@ class TimeAvailableController extends Controller
                 ];
             }
         }
-            
-        
         return $daysWithSlots;
        
     }
@@ -247,7 +242,6 @@ class TimeAvailableController extends Controller
         $timing = time_available::all();
         return view('Admin.time_sch',compact('timing'));
     }
-
    
 
 }

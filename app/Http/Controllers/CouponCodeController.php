@@ -61,7 +61,7 @@ class CouponCodeController extends Controller
     public function edit($id)
     {
         $coupon = Couponcode::where('id' ,'=',$id)->first();
-        return view('admin.edit_coupon',compact('coupon'));
+        return view('Admin.edit_coupon',compact('coupon'));
     }
 
     /**

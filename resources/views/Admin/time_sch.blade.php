@@ -66,6 +66,72 @@ input:checked + .slider:before {
 .show_time{
   display:none;
 }
+.week-name{
+  margin-left:30px;font-size:20px
+}
+
+/* responsive  */
+
+@media (max-width: 575.98px) {
+  
+  .week-name{
+    margin-left:20px;font-size:18px
+  }
+  .switch{
+    width:40px;
+    height:21px;
+  }
+  .slider{
+    right: -6px;
+  }
+  .slider:before{
+    height: 18px;
+    width:18px;
+    bottom:2px;
+    left:1px;
+  }
+  .top-heading{
+    font-size:20px;
+  }
+}
+@media (max-width: 498.98px) {
+    .div_size{
+      width:140px;
+    }
+
+}
+@media (max-width: 415.98px){
+  .week-name {
+    margin-left: 17px;
+    font-size: 15px;
+  }
+  .switch{
+    width:32px;
+    height:18px;
+  }
+  .slider{
+    right:-11px;
+  }
+  .slider:before{
+    height: 15px;
+    width: 15px;
+    bottom: 2px;
+    left: 1px;
+  }
+  .show_time label{
+    margin-left:15px;
+  }
+  .slot-menu{
+      margin-left:15px;
+  }
+  .slot-menu label{
+      margin-right:15px;
+  }
+  .slot-menu input{
+      width:105px;
+  }
+}
+
 </style>
 
 @section('content')
@@ -76,38 +142,10 @@ input:checked + .slider:before {
     </div>
     <div style="display:flex">
       <div class="card-body">
-        <h3>Hours Operation</h3>
+        <h3 class="top-heading">Hours Operation</h3>
         <form method="POST" action="{{ url('/insert-timing') }}" >
           @csrf
           <div id="outer"></div>
-
-          <!-- 
-          <div class="form-group" style="display:flex">
-            <div>
-              <label class="switch">
-                <input type="checkbox" class="timing_select_sun" name="timing_select" value="sunday">
-                <span class="slider round"></span>
-              </label> 
-            </div>
-            <div class="div_size">
-              <h3 style="margin-left:30px;font-size:20px">Sunday</span>
-            </div>
-            <div class="show_time" id="" style="display:none">
-              <div id="range"></div>
-              <label>
-                  Start
-                  <input name="start_time"  id="start" mbsc-input placeholder="Please select..." />
-              </label>
-              <label>
-                  End
-                  <input id="end" name="end_time"   mbsc-input placeholder="Please select..." />
-              </label>
-            </div>
-          
-          </div> -->
-
-        
-
           <div class="form-row">
             <div class="col-md-5 m-auto">
               <div class="form-group text-center">
@@ -117,40 +155,13 @@ input:checked + .slider:before {
           </div>
         </form>
       </div>
-      <div>
-        <div class="card-body">
-          <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                      <tr>
-                        <th>Day Name</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                      </tr>
-                  </thead>
-                    
-                  <tbody>
-                    @foreach($timing as $row)
-                      <tr>
-                        <td>{{ $row->day_name }}</td>
-                        <td>{{ $row->start_time }}</td>
-                        <td>{{ $row->end_time }}</td>
-                        <td>{{ $row->end_time }}</td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-            </div>
-        </div>
-      </div>
-    </div>
-   
+
 </div>
 
 
 <script>
+  // on off show time
 window.addEventListener('load', function () {
-  // alert('{!! json_encode($timing) !!}')
   const timing = {!! json_encode($timing) !!}
   timing.forEach((item, i)=>{
     console.log({item});
@@ -164,7 +175,7 @@ window.addEventListener('load', function () {
   
 })
 
-  // {{$timing}}.map((item)=>console.log({item}))
+  // all days 
   const timing = {!! json_encode($timing) !!}
   const img_list = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday',  'Saturday'];
   console.log(timing);
@@ -181,18 +192,18 @@ let result = timing.map((v, i) => `<div class='form-group' style='display:flex' 
                                             
                                         </div>
                                         <div class='div_size' >
-                                          <h3 style='margin-left:30px;font-size:20px'>${v.day_name}</span>
+                                          <h3 class='week-name' style=''>${v.day_name}</span>
                                         </div>
                                         
                                         <div   class='show_time' id="${i}-range-picker" style="display:none">
-                                          <div style="display:flex">
+                                          <div style="display:flex" class='slot-menu'>
                                             <div id='range'></div>
-                                            <label>
-                                                Start
+                                            <label style='margin-right:20px'>
+                                               
                                                 <input value='${v.start_time}' id='start_time' type='time' name='start_time[]' mbsc-input placeholder='Please select...' />
                                             </label>  
                                             <label>
-                                                End
+                                          
                                                 <input value='${v.end_time}' id='end_time'   type='time' name='end_time[]'   mbsc-input placeholder='Please select...' />
                                             </label>
                                             </div>

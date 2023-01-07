@@ -34,28 +34,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'zip_code' => 'required',
-        //     'service_type' => 'required',
-        //     'model' => 'required',
-        //     'device_issue_name' => 'required',
-        //     'device_issue_description' => 'required',
-        //     'screen_color' => 'required',
-        //     'warrenty' => 'required',
-        //     'screen_protector' => 'required',
-        //     'charger_cable' => 'required',
-        //     'date' => 'required',
-        //     'time' => 'required',
-        //     'address' => 'required',
-        //     'unit_floor' => 'required',
-        //     'phone' => 'required',
-        //     'email' => 'required',
-        //     'total_price' => 'required',
-            
-        // ]);
-        // $booking = json_decode($request,true);
-    
+
         $booking = new Booking;
         $booking->zip_code = $request->zip_code;
         $booking->service_type = $request->service_type;
@@ -75,14 +54,9 @@ class BookingController extends Controller
         $booking->email = $request->email;
         $booking->total_price = $request->total_price;
 
-        // $result = json_decode($booking);
-        // $result = Booking::create($request->all());
+    
         $booking->save();
-            
-        // return response()->json($booking);
-        // if($result){
-        //     return Redirect()->route('all-booking');
-        // }
+      
     }
 
     /**
