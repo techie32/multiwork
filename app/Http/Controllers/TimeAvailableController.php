@@ -8,7 +8,7 @@ use DB;
 use Carbon\CarbonPeriod;
 use DateTime;
 use App\Models\LeadTime;
-
+use App\Models\Booking;
 class TimeAvailableController extends Controller
 {
     /**
@@ -154,39 +154,62 @@ class TimeAvailableController extends Controller
         foreach($availableDays as $key => $value){
             $daysInAvailableDays[] = $value->day_name;
         }
+    
 
-        $l = $givendate;
-        $date =  new Carbon($l);
+        $changeformat = $givendate;
+        
+        $date =  new Carbon($changeformat);
 
         $leadtime = LeadTime::get();
         $leadtimevalue = $leadtime[0]->lead_time;
-
+        
         $daysWithSlots = [];
         while (count($daysWithSlots) < 7) {
             $date->modify('+1 day');
-          
+                
             if (in_array($weekDays[$date->format('w')], $daysInAvailableDays)) {
-
                 $specificDay = '';
                 foreach($availableDays as $key => $value){
                     if($value->day_name == $weekDays[$date->format('w')] ){
                         $specificDay = $value;
                     }
                 }
-                    $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
-                    $slots = [];
-                    foreach($period as $item){
-                        array_push($slots,$item->format("h:i A"));
-                    } 
+                $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
+            
+                $slots = [];
+                
+                foreach($period as $item){
+                    array_push($slots,$item->format("h:i A"));
+                } 
+                
+                $datenew = $date->format('Y-m-d');
+                $bookedslot = Booking::where('date' , '=', $datenew)->get();
+                
+                $bookslotdata = [];
+                foreach($bookedslot as $key => $value){
+                    $bookslotdata[] = $value->time;
+                }
+                
+                $allslot =  $slots;
+                $doneslot = $bookslotdata;
 
+                $filterslot = array_diff($allslot, $doneslot);
+                $slots = $filterslot;
+                
                 $daysWithSlots[] = [
                   'date' => $date->format('Y-m-d'),
-                  'slots' => $slots,
+                  'slots' =>  $slots,
                   'dayName' => $weekDays[$date->format('w')],
                 ];
+                
+              
             }
+            
         }
+        
+
         return $daysWithSlots;
+        
        
     }
 
@@ -221,12 +244,25 @@ class TimeAvailableController extends Controller
                         $specificDay = $value;
                     }
                 }
-                    $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
-                    $slots = [];
-                    foreach($period as $item){
-                        array_push($slots,$item->format("h:i A"));
-                    } 
+                $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
+                $slots = [];
+                foreach($period as $item){
+                    array_push($slots,$item->format("h:i A"));
+                } 
+                $datenew = $date->format('Y-m-d');
+                $bookedslot = Booking::where('date' , '=', $datenew)->get();
+                
+                $bookslotdata = [];
+                foreach($bookedslot as $key => $value){
+                    $bookslotdata[] = $value->time;
+                }
+                
+                $allslot =  $slots;
+                $doneslot = $bookslotdata;
 
+                $filterslot = array_diff($allslot, $doneslot);
+                $slots = $filterslot;
+              
                 $daysWithSlots[] = [
                   'date' => $date->format('Y-m-d'),
                   'slots' => $slots,
@@ -241,6 +277,17 @@ class TimeAvailableController extends Controller
     public function TimeShow(){
         $timing = time_available::all();
         return view('Admin.time_sch',compact('timing'));
+    }
+
+    public function bookedslot(){
+        $date = '27 Dec 2022';
+        $bookedslot = Booking::where('date' , '=', $date)->get();
+   
+        $slotdata = [];
+        foreach($bookedslot as $key => $value){
+            $slotdata[] = $value->time;
+        }
+        return $slotdata;   
     }
    
 

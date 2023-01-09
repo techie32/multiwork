@@ -51,7 +51,6 @@
                         <td>{{ $row->total_price }}</td>
                     </tr>
                     @endforeach
-                    
                 </tbody>
             </table>
         </div>
