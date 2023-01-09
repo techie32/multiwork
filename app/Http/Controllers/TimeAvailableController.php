@@ -279,16 +279,6 @@ class TimeAvailableController extends Controller
         return view('Admin.time_sch',compact('timing'));
     }
 
-    public function bookedslot(){
-        $date = '27 Dec 2022';
-        $bookedslot = Booking::where('date' , '=', $date)->get();
-   
-        $slotdata = [];
-        foreach($bookedslot as $key => $value){
-            $slotdata[] = $value->time;
-        }
-        return $slotdata;   
-    }
    
 
 }

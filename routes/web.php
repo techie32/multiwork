@@ -70,8 +70,6 @@ Route::get('/timing-manage', function () {
 Route::post('/insert-timing',[TimeAvailableController::class,'update'])->middleware(['auth']);
 
 Route::get('/timing-availability',[TimeAvailableController::class,'Timeshow'])->middleware(['auth'])->name('timing-availability');
-// cal
-Route::get('/cal-hour/{dayname}',[TimeAvailableController::class,'cal'])->middleware(['auth']);
 
 
 Route::post('update-leadtime/{id}',[LeadTimeController::class,'update'])->name('leadtime.update');
