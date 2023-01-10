@@ -1,6 +1,6 @@
 @extends('layouts.admin_master')
 @section('content')
-<div class="card mb-4">
+<div class="card mb-4 ">
     <div class="card-header">
         <i class="fas fa-table mr-1"></i>
         Availability
@@ -27,15 +27,7 @@
                     </div>
                 </div>
             </div>
-            <h5>How far in advance can new jobs be scheduled online ? </h5>
-            <div class="form-row ">
-                <div class="col-md-3">
-                    <div class="form-group">
-                       
-                        <input class="form-control py-4" name="model" type="number" min="1"   />
-                    </div>
-                </div>
-            </div>
+           
             <div class="col-md-5 m-auto">
                 <div class="form-group text-center">
                     <button class="btn btn-primary  btn-default m-auto">Submit</button>

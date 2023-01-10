@@ -23,8 +23,8 @@
                         <td>{{ $row->coupon_code }}</td>
                         <td>{{ $row->amount }}</td>
                         <td>
-                            <a href="{{route('coupon.edit', ['id' => $row->id] )}}" class="btn btn-sm btn-info">Edit</a>
-                            <a href="{{route('coupon.delete', ['id' => $row->id] )}}" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{{route('coupon.edit', ['id' => $row->id] )}}" class="btn btn-sm btn-info custom-btn">Edit</a>
+                            <a href="{{route('coupon.delete', ['id' => $row->id] )}}" class="btn btn-sm btn-danger custom-btn">Delete</a>
                         </td>
                     </tr>
                     @endforeach

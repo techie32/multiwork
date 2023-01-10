@@ -96,13 +96,16 @@ input:checked + .slider:before {
 }
 @media (max-width: 498.98px) {
     .div_size{
-      width:140px;
+      width:80px;
+    }
+    .slot-menu label{
+      margin-right:1px;
     }
 
 }
 @media (max-width: 415.98px){
   .week-name {
-    margin-left: 17px;
+    margin-left: 13px;
     font-size: 15px;
   }
   .switch{
@@ -110,7 +113,7 @@ input:checked + .slider:before {
     height:18px;
   }
   .slider{
-    right:-11px;
+    right:-10px;
   }
   .slider:before{
     height: 15px;
@@ -125,11 +128,18 @@ input:checked + .slider:before {
       margin-left:15px;
   }
   .slot-menu label{
-      margin-right:15px;
+      margin-right:10px;
   }
   .slot-menu input{
-      width:105px;
+      width:80px;
+      height:20px;
   }
+  .week-name{
+    /* width:20px; */
+    font-size:13px;
+  }
+  
+
 }
 
 </style>
@@ -198,7 +208,7 @@ let result = timing.map((v, i) => `<div class='form-group' style='display:flex' 
                                         <div   class='show_time' id="${i}-range-picker" style="display:none">
                                           <div style="display:flex" class='slot-menu'>
                                             <div id='range'></div>
-                                            <label style='margin-right:20px'>
+                                            <label style=''>
                                                
                                                 <input value='${v.start_time}' id='start_time' type='time' name='start_time[]' mbsc-input placeholder='Please select...' />
                                             </label>  

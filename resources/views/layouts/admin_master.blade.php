@@ -18,6 +18,77 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
+        <style>
+            @media (max-width: 500px) {
+                td{
+                    text-align:center;
+                }
+                .custom-btn{
+                  
+                    width:60%;
+                    margin-top:5px;
+                }
+                .nav-link{
+                    font-size:13px;
+                }
+
+            }                
+            @media (max-width: 450px) {
+                td{
+                    text-align:center;
+                }
+                .custom-btn{
+                  width:70%;
+                  font-size:10px;
+                }
+                .width-change{
+                    width:130%;
+                }
+
+            }      
+            @media (max-width: 420px) {
+               
+                .custom-btn{
+                  width:90%;
+                  font-size:8px;
+                  height:20px;
+                }
+                .nav-link{
+              
+                    font-size:10px;
+                }
+                /* .width-change{
+                    width:140%;
+                } */
+
+            }   
+            /* @media (max-width: 400px) {
+               
+              
+               .width-change{
+                   width:140%;
+               }
+
+            }   
+            @media (max-width: 350px) {
+                .width-change{
+                    width:155%;
+                }
+            }   
+            @media (max-width: 310px) {
+                .width-change{
+                    width:170%;
+                }
+            }   
+            @media (max-width: 210px) {
+                .width-change{
+                    width:170%;
+                }
+            }   
+            */
+
+            
+        </style>
    
     </head>
     <body class="sb-nav-fixed">

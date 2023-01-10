@@ -27,8 +27,8 @@
                         <td>{{ $row->price }}</td>
                         <td><img width="50px" height="50px" src= "data:image/jpg;base64,  {{$row->image}} "></td>
                         <td>
-                            <a href="{{route('mobile.edit', ['id' => $row->id] )}}" class="btn btn-sm btn-info">Edit</a>
-                            <a href="{{route('mobile.delete', ['id' => $row->id] )}}" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{{route('mobile.edit', ['id' => $row->id] )}}" class="btn btn-sm btn-info custom-btn">Edit</a>
+                            <a href="{{route('mobile.delete', ['id' => $row->id] )}}" class="btn btn-sm btn-danger custom-btn">Delete</a>
                         </td>
                     </tr>
                     @endforeach

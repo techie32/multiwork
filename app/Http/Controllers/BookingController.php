@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
+use DB;
 class BookingController extends Controller
 {
     /**
@@ -106,7 +107,12 @@ class BookingController extends Controller
     }
     public function Allbooking()
     {
-        $bookings = Booking::all();
+        $bookings = Booking::all()->reverse()->values();
+
+        // $bookings = DB::table('booking')->select(DB::raw('*'))
+        // ->whereRaw('Date(created_at) = CURDATE()')->get();
+        // dd($records);
+
         return view('Admin.booking_list',compact('bookings'));
     }
 }
