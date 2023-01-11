@@ -17,7 +17,6 @@ class CreateMobileInfoTable extends Migration
             $table->id();
             $table->string('mobile_name');
             $table->string('model');
-            $table->integer('price');
             $table->longtext('image'); 
             $table->timestamps();
         });

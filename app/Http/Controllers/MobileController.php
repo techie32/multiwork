@@ -38,7 +38,7 @@ class MobileController extends Controller
         $mobile = new Mobile_info();
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
-        $mobile->price = $request->price;
+      
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
  
         $mobile->save();
@@ -82,7 +82,7 @@ class MobileController extends Controller
         $mobile = Mobile_info::find($id);
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
-        $mobile->price = $request->price;
+       
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
         if($mobile->save())
         {

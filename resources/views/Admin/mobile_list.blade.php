@@ -13,7 +13,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Model</th>
-                        <th>Price</th>
+                      
                         <th>Pic</th>
                         <th>Action</th>
                     </tr>
@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ $row->mobile_name }}</td>
                         <td>{{ $row->model }}</td>
-                        <td>{{ $row->price }}</td>
+                       
                         <td><img width="50px" height="50px" src= "data:image/jpg;base64,  {{$row->image}} "></td>
                         <td>
                             <a href="{{route('mobile.edit', ['id' => $row->id] )}}" class="btn btn-sm btn-info custom-btn">Edit</a>

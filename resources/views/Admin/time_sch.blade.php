@@ -70,6 +70,9 @@ input:checked + .slider:before {
   margin-left:30px;font-size:20px
 }
 
+.slot-menu label{
+  margin-right:5px;
+}
 /* responsive  */
 
 @media (max-width: 575.98px) {
@@ -96,7 +99,7 @@ input:checked + .slider:before {
 }
 @media (max-width: 498.98px) {
     .div_size{
-      width:80px;
+      width:85px;
     }
     .slot-menu label{
       margin-right:1px;
@@ -105,15 +108,15 @@ input:checked + .slider:before {
 }
 @media (max-width: 415.98px){
   .week-name {
-    margin-left: 13px;
-    font-size: 15px;
+    margin-left: 17px;
+    font-size: 20px;
   }
   .switch{
     width:32px;
     height:18px;
   }
   .slider{
-    right:-10px;
+    right:-11px;
   }
   .slider:before{
     height: 15px;
