@@ -13,7 +13,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Model</th>
-                      
+                        <th>Battery Replacement Price</th>
+                        <th>Screen Replacement Price</th>
                         <th>Pic</th>
                         <th>Action</th>
                     </tr>
@@ -25,6 +26,8 @@
                         <td>{{ $row->mobile_name }}</td>
                         <td>{{ $row->model }}</td>
                        
+                        <td>{{ $row->battery_replacement_price }}</td>
+                        <td>{{ $row->screen_replacement_price }}</td>
                         <td><img width="50px" height="50px" src= "data:image/jpg;base64,  {{$row->image}} "></td>
                         <td>
                             <a href="{{route('mobile.edit', ['id' => $row->id] )}}" class="btn btn-sm btn-info custom-btn">Edit</a>

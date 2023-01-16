@@ -15,7 +15,6 @@
                         <th>service_type</th>
                         <th>model</th>
                         <th>device_issue_name</th>
-                        <th>device_issue_description</th>
                         <th>screen_color</th>
                         <th>warrenty</th>
                         <th>charge_cable</th>
@@ -37,7 +36,6 @@
                         <td>{{ $row->service_type }}</td>
                         <td>{{ $row->model }}</td>
                         <td>{{ $row->device_issue_name }}</td>
-                        <td>{{ $row->device_issue_description }}</td>
                         <td>{{ $row->screen_color }}</td>
                         <td>{{ $row->warrenty }}</td>
                         <td>{{ $row->charger_cable }}</td>

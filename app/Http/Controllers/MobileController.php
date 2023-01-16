@@ -38,7 +38,8 @@ class MobileController extends Controller
         $mobile = new Mobile_info();
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
-      
+        $mobile->battery_replacement_price = $request->battery_replacement_price;
+        $mobile->screen_replacement_price = $request->screen_replacement_price;
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
  
         $mobile->save();
@@ -82,6 +83,8 @@ class MobileController extends Controller
         $mobile = Mobile_info::find($id);
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
+        $mobile->battery_replacement_price = $request->battery_replacement_price;
+        $mobile->screen_replacement_price = $request->screen_replacement_price;
        
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
         if($mobile->save())

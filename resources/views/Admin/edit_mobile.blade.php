@@ -24,10 +24,29 @@
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
                                         <label class="small mb-1" for="inputLastName">Model</label>
-                                        <input class="form-control py-4" name="model" type="text" value="{{ $mobile->model}}" placeholder=" " required />
+                                        <input class="form-control py-4" name="model" type="text" value="{{ $mobile->model}}" required />
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-row ">
+                                <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputLastName">Battery Replacement Price</label>
+                                        <input class="form-control py-4" name="battery_replacement_price" type="number" value="{{ $mobile->battery_replacement_price}}" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row ">
+                                <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputLastName">Screen Replacement Price</label>
+                                        <input class="form-control py-4" name="screen_replacement_price" type="number" value="{{ $mobile->screen_replacement_price}}" required />
+                                    </div>
+                                </div>
+                            </div>
+
 
 
                             <div class="form-row ">

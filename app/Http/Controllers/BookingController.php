@@ -41,7 +41,6 @@ class BookingController extends Controller
         $booking->service_type = $request->service_type;
         $booking->model = $request->model;
         $booking->device_issue_name = $request->device_issue_name;
-        $booking->device_issue_description = $request->device_issue_discription;
         $booking->screen_color = $request->screen_color;
         $booking->warrenty = $request->warrenty;
         $booking->screen_protector = $request->screen_protector;
@@ -53,8 +52,8 @@ class BookingController extends Controller
         $booking->name = $request->name;
         $booking->phone = $request->phone;
         $booking->email = $request->email;
+        $booking->coupon_code = $request->applied_coupon_code;
         $booking->total_price = $request->total_price;
-
     
         $booking->save();
       
