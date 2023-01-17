@@ -144,6 +144,28 @@
                                     <a class="nav-link" href="{{ route('all-mobile') }}">Available Mobile</a>
                                 </nav>
                             </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAddOn" aria-expanded="false" aria-controls="collapseAddOn">
+                                <div class="sb-nav-link-icon"><i class="fas fa-mobile"></i></div>
+                                Add On's
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseAddOn" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ url('add-new-addon') }}">New AddOn</a>
+                                    <a class="nav-link" href="{{ route('all-addon') }}">Available AddOn</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseService" aria-expanded="false" aria-controls="collapseService">
+                                <div class="sb-nav-link-icon"><i class="fas fa-mobile"></i></div>
+                                Service Menu
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseService" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ url('add-new-service') }}">New Service</a>
+                                    <a class="nav-link" href="{{ route('all-service') }}">Available Service</a>
+                                </nav>
+                            </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsecoupon" aria-expanded="false" aria-controls="collapsecoupon">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                                Coupon Code

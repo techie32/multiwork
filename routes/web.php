@@ -7,6 +7,8 @@ use App\Http\Controllers\CouponCodeController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TimeAvailableController;
 use App\Http\Controllers\LeadTimeController;
+use App\Http\Controllers\AddOnController;
+use App\Http\Controllers\ServicesController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 
@@ -48,6 +50,33 @@ Route::get('/mobile-list',[MobileController::class,'Allmobile'])->middleware(['a
 Route::get('mobile.delete/{id}',[MobileController::class,'delete'])->name('mobile.delete');
 Route::get('mobile.edit/{id}',[MobileController::class,'edit'])->name('mobile.edit');
 Route::post('update-mobile/{id}',[MobileController::class,'update'])->name('mobile.update');
+
+
+
+// add on's
+
+Route::get('/add-new-addon', function () {
+    return view('Admin.add_on');
+})->middleware(['auth'])->name('add.add_on');
+
+Route::post('/insert-addon',[AddOnController::class,'store'])->middleware(['auth']);
+Route::get('/addon-list',[AddOnController::class,'AllAddOn'])->middleware(['auth'])->name('all-addon');
+Route::get('addon.delete/{id}',[AddOnController::class,'destroy'])->name('addon.delete');
+Route::get('addon.edit/{id}',[AddOnController::class,'edit'])->name('addon.edit');
+Route::post('update-addon/{id}',[AddOnController::class,'update'])->name('addon.update');
+
+// servicess
+
+Route::get('/add-new-service', function () {
+    return view('Admin.add_service');
+})->middleware(['auth'])->name('add.service');
+
+Route::post('/insert-service',[ServicesController::class,'store'])->middleware(['auth']);
+Route::get('/service-list',[ServicesController::class,'AllService'])->middleware(['auth'])->name('all-service');
+Route::get('service.delete/{id}',[ServicesController::class,'destroy'])->name('service.delete');
+Route::get('service.edit/{id}',[ServicesController::class,'edit'])->name('service.edit');
+Route::post('update-service/{id}',[ServicesController::class,'update'])->name('service.update');
+
 
 // coupon code
 Route::get('/add-new-couponcode', function () {

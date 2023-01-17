@@ -6,6 +6,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MobileController;
 use App\Http\Controllers\CouponCodeController;
 use App\Http\Controllers\TimeAvailableController;
+use App\Http\Controllers\AddOnController;
+use App\Http\Controllers\ServicesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,10 +35,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/mobileinfo',[MobileController::class,'index']);
 Route::get('/mobileinfo/{id}',[MobileController::class,'show']);
-Route::post('/mobileinfo',[MobileController::class,'store']);
+// Route::post('/mobileinfo',[MobileController::class,'store']);
+
+Route::get('/addondata',[AddOnController::class,'index']);
+Route::get('/addondata/{id}',[AddOnController::class,'show']);
+
+Route::get('/servicedata',[ServicesController::class,'index']);
+Route::get('/servicedata/{id}',[ServicesController::class,'show']);
+
+
 
 
 Route::get('/couponcode',[CouponCodeController::class,'index']);
 
 Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
 Route::get('/timing-slot-pre/{givendate}',[TimeAvailableController::class,'calculatepreviousslot']);
+
+
