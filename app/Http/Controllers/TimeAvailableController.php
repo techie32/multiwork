@@ -164,18 +164,78 @@ class TimeAvailableController extends Controller
         $leadtimevalue = $leadtime[0]->lead_time;
         
         $daysWithSlots = [];
+        $index = 0;
         while (count($daysWithSlots) < 7) {
-            $date->modify('+1 day');
-                
-            if (in_array($weekDays[$date->format('w')], $daysInAvailableDays)) {
+            // dd($daysWithSlots);
+            // $date->modify('+1 day');
+            $current_time = carbon::now();
+            $created_at = $current_time->format("H:i:s");
+           
+            if (in_array($weekDays[$date->format('w')], $daysInAvailableDays))
+            {
                 $specificDay = '';
                 foreach($availableDays as $key => $value){
                     if($value->day_name == $weekDays[$date->format('w')] ){
                         $specificDay = $value;
                     }
                 }
+      
+                // $restrictStartTime = Carbon::createFromTime(Carbon::now());
+                // $restrictStartTime->toDateTimeString();
+                // dd($restrictStartTime);
                 $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
-            
+                // dd($specificDay->start_time);
+                // dd($created_at);
+                if($created_at > $specificDay->start_time)
+                { 
+                    
+                    for($i = 0;$i < $specificDay->start_time; $i++){
+                       $z = $specificDay->start_time;
+
+                       $z++;
+
+                    }
+                    dd($z);
+                }
+                // dd($specificDay->start_time);
+
+                 /**
+                  * if(index === 0){
+
+                     time from FE 
+                    
+
+                     if fe < start time 
+                     loop filter 
+
+              
+                  */
+
+
+            //    $test = (int)$specificDay->start_time - (int)$created_at;
+            //    if($test < 0){ 
+            //     dd($test);
+
+            //    }else{
+            //     dd("remain");
+            //    }
+               
+                // $currentHour = Carbon::now()->hour;
+                // dd($currentHour);
+                // $startTime = '0';
+                // $endTime = '6';
+                // $start  = $this->startTime > $this->endTime ? !($this->startTime <= $currentHour) : $this->startTime <= $currentHour;
+                // $end = $currentHour < $this->endTime;
+                $start = ('22:0:0'); 
+                 $end = ('08:0:0');  
+                $now = Carbon::now('UTC'); 
+                // dd($now);
+
+                if( $start < $now->hour && $now->hour < $end){
+                        // Do something
+                        dd("nsd'_");
+                 }
+  
                 $slots = [];
                 
                 foreach($period as $item){
@@ -202,10 +262,11 @@ class TimeAvailableController extends Controller
                   'dayName' => $weekDays[$date->format('w')],
                 ];
                 
-              
             }
-            
+            // dd($daysWithSlots);
+            $index = $index+1;
         }
+        // dd($daysWithSlots);
         
 
         return $daysWithSlots;

@@ -32,20 +32,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// mobile api 
 Route::get('/mobileinfo',[MobileController::class,'index']);
 Route::get('/mobileinfo/{id}',[MobileController::class,'show']);
-// Route::post('/mobileinfo',[MobileController::class,'store']);
 
+// add on 
 Route::get('/addondata',[AddOnController::class,'index']);
 Route::get('/addondata/{id}',[AddOnController::class,'show']);
 
+// service 
 Route::get('/servicedata',[ServicesController::class,'index']);
 Route::get('/servicedata/{id}',[ServicesController::class,'show']);
 
 
-
-
+// coupon 
 Route::get('/couponcode',[CouponCodeController::class,'index']);
 
 Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);

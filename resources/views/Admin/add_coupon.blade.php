@@ -14,7 +14,7 @@
                             <div class="form-row">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputFirstName">Coupon Code</label>
+                                        <label class="Large mb-1" for="inputFirstName">Coupon Code</label>
                                         <input class="form-control py-4" name="coupon_code" type="text" placeholder="" required />
                                     </div>
                                 </div>
@@ -22,7 +22,7 @@
                             <div class="form-row">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Amount</label>
+                                        <label class="Large mb-1" for="inputLastName">Amount</label>
                                         <input class="form-control py-4" name="amount" type="text" placeholder="" required />
                                     </div>
                                 </div>

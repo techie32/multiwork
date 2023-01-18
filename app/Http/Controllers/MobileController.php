@@ -34,15 +34,22 @@ class MobileController extends Controller
      */
     public function store(Request $request)
     {
+        
 
         $mobile = new Mobile_info();
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
         $mobile->battery_replacement_price = $request->battery_replacement_price;
         $mobile->screen_replacement_price = $request->screen_replacement_price;
-        $mobile->image =  base64_encode(file_get_contents($request->file('image')));
+  
  
+        $arraytostring = implode(',',$request->input('modelcategory'));
+        $mobile->modelcategory =  $arraytostring;
+
+        $mobile->image =  base64_encode(file_get_contents($request->file('image')));
+        
         $mobile->save();
+        
     
         return Redirect()->route('all-mobile');
     }
@@ -85,7 +92,11 @@ class MobileController extends Controller
         $mobile->model = $request->model;
         $mobile->battery_replacement_price = $request->battery_replacement_price;
         $mobile->screen_replacement_price = $request->screen_replacement_price;
-       
+        $arraytostring = implode(',',$request->input('modelcategory'));
+        $mobile->modelcategory =  $arraytostring;
+        // dd($mobile);
+        // $mobile->modelcategory = $request->has(key:'modelcategory');
+     
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
         if($mobile->save())
         {

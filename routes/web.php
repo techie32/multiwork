@@ -12,6 +12,8 @@ use App\Http\Controllers\ServicesController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\WarrentyController;
+
 Route::resource('users', UserController::class, ['except' => ['create', 'edit']]);
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -65,15 +67,26 @@ Route::get('addon.delete/{id}',[AddOnController::class,'destroy'])->name('addon.
 Route::get('addon.edit/{id}',[AddOnController::class,'edit'])->name('addon.edit');
 Route::post('update-addon/{id}',[AddOnController::class,'update'])->name('addon.update');
 
+// warrenty 
+Route::get('/add-new-warrenty', function () {
+    return view('Admin.add_on_warrenty');
+})->middleware(['auth'])->name('add.add_on_warrenty');
+
+Route::post('/insert-warrenty',[WarrentyController::class,'store'])->middleware(['auth']);
+Route::get('/warrenty-list',[WarrentyController::class,'AllWarrenty'])->middleware(['auth'])->name('all-warrenty');
+Route::get('warrenty.delete/{id}',[WarrentyController::class,'destroy'])->name('warrenty.delete');
+Route::get('warrenty.edit/{id}',[WarrentyController::class,'edit'])->name('warrenty.edit');
+Route::post('update-warrenty/{id}',[WarrentyController::class,'update'])->name('warrenty.update');
+
 // servicess
 
-Route::get('/add-new-service', function () {
-    return view('Admin.add_service');
-})->middleware(['auth'])->name('add.service');
+// Route::get('/add-new-service', function () {
+//     return view('Admin.add_service');
+// })->middleware(['auth'])->name('add.service');
 
-Route::post('/insert-service',[ServicesController::class,'store'])->middleware(['auth']);
+// Route::post('/insert-service',[ServicesController::class,'store'])->middleware(['auth']);
 Route::get('/service-list',[ServicesController::class,'AllService'])->middleware(['auth'])->name('all-service');
-Route::get('service.delete/{id}',[ServicesController::class,'destroy'])->name('service.delete');
+// Route::get('service.delete/{id}',[ServicesController::class,'destroy'])->name('service.delete');
 Route::get('service.edit/{id}',[ServicesController::class,'edit'])->name('service.edit');
 Route::post('update-service/{id}',[ServicesController::class,'update'])->name('service.update');
 

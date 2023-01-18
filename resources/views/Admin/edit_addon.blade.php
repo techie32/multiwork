@@ -14,7 +14,7 @@
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputFirstName">AddOn Name</label>
+                                        <label class="Large mb-1" for="inputFirstName">AddOn Name</label>
                                         <input class="form-control py-4" name="addon_name" type="text" placeholder="" value="{{ $addon->addon_name}}" required/>
                                     </div>
                                 </div>
@@ -23,7 +23,7 @@
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Price</label>
+                                        <label class="Large mb-1" for="inputLastName">Price</label>
                                         <input class="form-control py-4" name="price" type="text" value="{{ $addon->price}}" required />
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label small mb-1">AddOn Pic</label>
+                                        <label for="formFile" class="form-label Large mb-1">AddOn Pic</label>
                                         <input class="form-control" type="file" name="image" id="formFile"  required>
                                         <img width="50px" height="50px" src= "data:image/jpg;base64,  {{$addon->image}} ">
                                     </div>

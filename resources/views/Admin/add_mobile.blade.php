@@ -14,7 +14,7 @@
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputFirstName">Mobile Name</label>
+                                        <label class="Large mb-1" for="inputFirstName">Mobile Name</label>
                                         <input class="form-control py-4" name="mobile_name" type="text" placeholder="" required/>
                                     </div>
                                 </div>
@@ -23,20 +23,19 @@
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Model</label>
+                                        <label class="Large mb-1" for="inputLastName">Model</label>
                                         <input class="form-control py-4" name="model" type="text" placeholder=" " required />
                                     </div>
                                 </div>
                             </div>
 
                            
-                           
 
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Battery Replacement Price</label>
-                                        <input class="form-control py-4" name="battery_replacement_price" type="number" placeholder=" " required />
+                                        <label class="Large mb-1" for="inputLastName">Battery Replacement Price</label>
+                                        <input class="form-control py-4" name="battery_replacement_price" type="number" placeholder=" "  />
                                     </div>
                                 </div>
                             </div>
@@ -44,8 +43,8 @@
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Screen Replacement Price</label>
-                                        <input class="form-control py-4" name="screen_replacement_price" type="number" placeholder=" " required />
+                                        <label class="Large mb-1" for="inputLastName">Screen Replacement Price</label>
+                                        <input class="form-control py-4" name="screen_replacement_price" type="number" placeholder=" "  />
                                     </div>
                                 </div>
                             </div>
@@ -53,12 +52,30 @@
                          
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            White Screen
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Black Screen
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row ">
+                                <div class="col-md-5 m-auto">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label small mb-1">Mobile Pic</label>
+                                        <label for="formFile" class="form-label Large mb-1">Mobile Pic</label>
                                         <input class="form-control" type="file" name="image" id="formFile" required>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="form-row">
                                 <div class="col-md-5 m-auto">
