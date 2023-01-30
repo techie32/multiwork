@@ -66,6 +66,24 @@
                                     </div>
                                 </div>
                             </div>
+                                
+                            <div class="form-row ">
+                                <div class="col-md-5 m-auto">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label Large mb-1">Warrenty Name</label>
+                                        <input class="form-control" type="text" name="warrenty_name" id="formFile" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row ">
+                                <div class="col-md-5 m-auto">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label Large mb-1">Warrenty Price</label>
+                                        <input class="form-control" type="text" name="warrenty_price" id="formFile" required>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">

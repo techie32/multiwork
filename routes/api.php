@@ -52,3 +52,5 @@ Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculate
 Route::get('/timing-slot-pre/{givendate}',[TimeAvailableController::class,'calculatepreviousslot']);
 
 
+Route::post('https://hooks.zapier.com/hooks/catch/7959662/bjvfjg4/',[TimeAvailableController::class,'test']);
+

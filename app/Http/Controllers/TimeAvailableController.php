@@ -151,6 +151,7 @@ class TimeAvailableController extends Controller
                 ->get();
 
         $daysInAvailableDays = [];
+
         foreach($availableDays as $key => $value){
             $daysInAvailableDays[] = $value->day_name;
         }
@@ -164,41 +165,28 @@ class TimeAvailableController extends Controller
         $leadtimevalue = $leadtime[0]->lead_time;
         
         $daysWithSlots = [];
-        $index = 0;
+        // $index = 0;
         while (count($daysWithSlots) < 7) {
             // dd($daysWithSlots);
-            // $date->modify('+1 day');
+            $date->modify('+1 day');
+          
+
             $current_time = carbon::now();
-            $created_at = $current_time->format("H:i:s");
+            $created_at = $current_time->format("H:i");
            
             if (in_array($weekDays[$date->format('w')], $daysInAvailableDays))
             {
+            
                 $specificDay = '';
                 foreach($availableDays as $key => $value){
                     if($value->day_name == $weekDays[$date->format('w')] ){
                         $specificDay = $value;
                     }
                 }
-      
-                // $restrictStartTime = Carbon::createFromTime(Carbon::now());
-                // $restrictStartTime->toDateTimeString();
-                // dd($restrictStartTime);
+                
+              
                 $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
-                // dd($specificDay->start_time);
-                // dd($created_at);
-                if($created_at > $specificDay->start_time)
-                { 
-                    
-                    for($i = 0;$i < $specificDay->start_time; $i++){
-                       $z = $specificDay->start_time;
-
-                       $z++;
-
-                    }
-                    dd($z);
-                }
-                // dd($specificDay->start_time);
-
+             
                  /**
                   * if(index === 0){
 
@@ -211,37 +199,15 @@ class TimeAvailableController extends Controller
               
                   */
 
-
-            //    $test = (int)$specificDay->start_time - (int)$created_at;
-            //    if($test < 0){ 
-            //     dd($test);
-
-            //    }else{
-            //     dd("remain");
-            //    }
                
-                // $currentHour = Carbon::now()->hour;
-                // dd($currentHour);
-                // $startTime = '0';
-                // $endTime = '6';
-                // $start  = $this->startTime > $this->endTime ? !($this->startTime <= $currentHour) : $this->startTime <= $currentHour;
-                // $end = $currentHour < $this->endTime;
-                $start = ('22:0:0'); 
-                 $end = ('08:0:0');  
-                $now = Carbon::now('UTC'); 
-                // dd($now);
-
-                if( $start < $now->hour && $now->hour < $end){
-                        // Do something
-                        dd("nsd'_");
-                 }
-  
                 $slots = [];
                 
                 foreach($period as $item){
+
                     array_push($slots,$item->format("h:i A"));
                 } 
-                
+
+               
                 $datenew = $date->format('Y-m-d');
                 $bookedslot = Booking::where('date' , '=', $datenew)->get();
                 
@@ -261,14 +227,14 @@ class TimeAvailableController extends Controller
                   'slots' =>  $slots,
                   'dayName' => $weekDays[$date->format('w')],
                 ];
-                
-            }
-            // dd($daysWithSlots);
-            $index = $index+1;
+               
+               
+            }  
+            
+            // $index = $index+1;
         }
-        // dd($daysWithSlots);
+        dd($daysWithSlots);
         
-
         return $daysWithSlots;
         
        
@@ -293,9 +259,10 @@ class TimeAvailableController extends Controller
 
         $leadtime = LeadTime::get();
         $leadtimevalue = $leadtime[0]->lead_time;
-
+        $index = 0;
         $daysWithSlots = [];
         while (count($daysWithSlots) < 7) {
+        
             $date->modify('-1 day');
             if (in_array($weekDays[$date->format('w')], $daysInAvailableDays)) {
 
@@ -306,6 +273,12 @@ class TimeAvailableController extends Controller
                     }
                 }
                 $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
+                $current_time = Carbon::now();
+
+                // $available_slots = Slot::where('start_time', '>', $current_time)
+                //       ->whereDate('start_time', '=', Carbon::today())
+                //     ->get();
+
                 $slots = [];
                 foreach($period as $item){
                     array_push($slots,$item->format("h:i A"));
@@ -329,7 +302,11 @@ class TimeAvailableController extends Controller
                   'slots' => $slots,
                   'dayName' => $weekDays[$date->format('w')],
                 ];
+                
             }
+            $index ++;
+
+        
         }
         return $daysWithSlots;
        
@@ -340,6 +317,23 @@ class TimeAvailableController extends Controller
         return view('Admin.time_sch',compact('timing'));
     }
 
-   
+    
+    public function test(){
+        $timing = [
+                "services_title" => "device test",
+                "services_descriptions" =>"device issue, screen color and warranty selection",
+                "services_cost" =>"$12.11",
+                "start" => "9/5/2020 18:00:00",
+                "consumers_name" =>"firstname lastname",
+                "consumers_email" => "abc@abc.com",
+                "consumers_mobile" =>"123456789",
+                "consumers_address_zip" => "12345",
+                "consumers_address_line1" => "street#sds",
+                "consumers_additionalFields_coupon_code" => "apt_unit_floor, coupon_code",
+                "add_ons" => "name of add ons",
+        ];
+        return $timing;
+    }
+    
 
 }

@@ -63,7 +63,21 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="form-row ">
+                                <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputLastName">Warrenty Name</label>
+                                        <input class="form-control py-4" name="warrenty_name" type="text" value="{{ $mobile->warrenty_name}}"  />
+                                    </div>
+                                </div>
+                            </div>   <div class="form-row ">
+                                <div class="col-md-5 m-auto">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputLastName">Warrenty Price</label>
+                                        <input class="form-control py-4" name="warrenty_price" type="number" value="{{ $mobile->warrenty_price}}"  />
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">

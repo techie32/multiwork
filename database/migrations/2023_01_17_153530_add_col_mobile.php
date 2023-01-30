@@ -15,6 +15,8 @@ class AddColMobile extends Migration
     {
         Schema::table('mobile_info', function (Blueprint $table) {
             $table->string('modelcategory')->after('screen_replacement_price')->nullable();
+            $table->string('warrenty_name')->after('modelcategory');
+            $table->string('warrenty_price')->after('warrenty_name');
         });
     }
 

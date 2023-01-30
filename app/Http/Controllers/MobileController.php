@@ -45,7 +45,9 @@ class MobileController extends Controller
  
         $arraytostring = implode(',',$request->input('modelcategory'));
         $mobile->modelcategory =  $arraytostring;
-
+        $mobile->warrenty_name =   $request->warrenty_name;
+        $mobile->warrenty_price =  $request->warrenty_price; 
+      
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
         
         $mobile->save();
@@ -94,8 +96,9 @@ class MobileController extends Controller
         $mobile->screen_replacement_price = $request->screen_replacement_price;
         $arraytostring = implode(',',$request->input('modelcategory'));
         $mobile->modelcategory =  $arraytostring;
-        // dd($mobile);
-        // $mobile->modelcategory = $request->has(key:'modelcategory');
+        $mobile->warrenty_name =   $request->warrenty_name;
+        $mobile->warrenty_price =  $request->warrenty_price; 
+      
      
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
         if($mobile->save())
