@@ -9,6 +9,7 @@ use Carbon\CarbonPeriod;
 use DateTime;
 use App\Models\LeadTime;
 use App\Models\Booking;
+use Illuminate\Support\Facades\Http;
 class TimeAvailableController extends Controller
 {
     /**
@@ -167,14 +168,11 @@ class TimeAvailableController extends Controller
         $daysWithSlots = [];
         $index = 0;
         while(count($daysWithSlots) < 7) {
-            // dd($daysWithSlots);
-            // $date->modify('+1 day');
-          
+
 
             $current_time = carbon::now();
-            // $created_at = $current_time->format("H:i");
-            $created_at = '12:30 PM';
-           
+            $created_at = $current_time->format("H:i");
+
             if (in_array($weekDays[$date->format('w')], $daysInAvailableDays))
             {
             
@@ -184,83 +182,49 @@ class TimeAvailableController extends Controller
                         $specificDay = $value;
                     }
                 }
-                
-
-                // $now = Carbon::now()->format('H:i A');
-                
-                // $time = time_available::where('start_time', '<', $now)->get();    
-                // // dd($time);
-                // $data = array('timeSlots'=>$time, 'current_time'=>$now);
-                // dd($data);
-                // $initial = $specificDay->start_time;    
-                // if($initial > $created_at){
                     
-                    $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
-
-                
-                    
-                    //   if($index === 0){
-                    //     $created_at
-                    //   }
-   
-                    //     time from FE 
-                       
-   
-                    //     if fe < start time 
-                    //     loop filter 
-   
-                 
+                $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
                      
-                  
-                   $slots = [];
+                $slots = [];
                    
-                   foreach($period as $item){
+                foreach($period as $item){
                     if($index == 0){
-                        if ( strtotime($created_at) < strtotime($item->format("h:i A")) ){
+                        if(strtotime($created_at) < strtotime($item->format("h:i A")) ){
                             array_push($slots,$item->format("h:i A")); 
                         }
                     }else{
                         array_push($slots,$item->format("h:i A"));
                     }
-                      
-                   } 
+                        
+                } 
                    
 
-                //    if($index === 0){
-                //     $slot.filter((item)=>item > $created_at)
-                //    }
+                $datenew = $date->format('Y-m-d');
+                $bookedslot = Booking::where('date' , '=', $datenew)->get();
+        
+                $bookslotdata = [];
+                foreach($bookedslot as $key => $value){
+                    $bookslotdata[] = $value->time;
+                }
                 
-                   
-                   $datenew = $date->format('Y-m-d');
-                   $bookedslot = Booking::where('date' , '=', $datenew)->get();
-                   
-                   $bookslotdata = [];
-                   foreach($bookedslot as $key => $value){
-                       $bookslotdata[] = $value->time;
-                   }
-                   
-                   $allslot =  $slots;
-                   $doneslot = $bookslotdata;
-   
-                   $filterslot = array_diff($allslot, $doneslot);
-                   $slots = $filterslot;
-                   
-                   $daysWithSlots[] = [
-                     'date' => $date->format('Y-m-d'),
-                     'slots' =>  $slots,
-                     'dayName' => $weekDays[$date->format('w')],
-                   ];
-                // }
+                $allslot =  $slots;
+                $doneslot = $bookslotdata;
               
+                $filterslot = array_diff($allslot, $doneslot);
                 
-               
+                $slots = $filterslot;
+                
+                $daysWithSlots[] = [
+                    'date' => $date->format('Y-m-d'),
+                    'slots' =>  $slots,
+                    'dayName' => $weekDays[$date->format('w')],
+                ];
                
             }  
             $date->modify('+1 day');
             $index = $index+1;
         }
-        // dd($daysWithSlots);
-        dd($daysWithSlots);
+     
         return $daysWithSlots;
         
        
@@ -288,8 +252,9 @@ class TimeAvailableController extends Controller
         $index = 0;
         $daysWithSlots = [];
         while (count($daysWithSlots) < 7) {
-        
-            $date->modify('-1 day');
+            $current_time = carbon::now();
+            $created_at = $current_time->format("H:i");
+            
             if (in_array($weekDays[$date->format('w')], $daysInAvailableDays)) {
 
                 $specificDay = '';
@@ -301,14 +266,21 @@ class TimeAvailableController extends Controller
                 $period = new CarbonPeriod($specificDay->start_time, $leadtimevalue, $specificDay->end_time); 
                 $current_time = Carbon::now();
 
-                // $available_slots = Slot::where('start_time', '>', $current_time)
-                //       ->whereDate('start_time', '=', Carbon::today())
-                //     ->get();
+                
 
                 $slots = [];
+                    
                 foreach($period as $item){
-                    array_push($slots,$item->format("h:i A"));
+                    if($index == 0){
+                        if(strtotime($created_at) < strtotime($item->format("h:i A")) ){
+                            array_push($slots,$item->format("h:i A")); 
+                        }
+                    }else{
+                        array_push($slots,$item->format("h:i A"));
+                    }
+                        
                 } 
+             
                 $datenew = $date->format('Y-m-d');
                 $bookedslot = Booking::where('date' , '=', $datenew)->get();
                 
@@ -330,6 +302,7 @@ class TimeAvailableController extends Controller
                 ];
                 
             }
+            $date->modify('-1 day');
             $index ++;
         
         }
@@ -344,20 +317,20 @@ class TimeAvailableController extends Controller
 
     
     public function test(){
-        $timing = [
-                "services_title" => "device test",
-                "services_descriptions" =>"device issue, screen color and warranty selection",
-                "services_cost" =>"$12.11",
-                "start" => "9/5/2020 18:00:00",
-                "consumers_name" =>"firstname lastname",
-                "consumers_email" => "abc@abc.com",
-                "consumers_mobile" =>"123456789",
-                "consumers_address_zip" => "12345",
-                "consumers_address_line1" => "street#sds",
-                "consumers_additionalFields_coupon_code" => "apt_unit_floor, coupon_code",
-                "add_ons" => "name of add ons",
-        ];
-        return $timing;
+        $booking = Booking::all()->last();
+
+
+        
+      
+    
+    }
+
+    public function addPost(){
+        $res = Http::post('https://reqres.in/api/users',[
+            'name' => 'khan',
+            'job' => 'dev'
+        ]);
+        dd($res->json());
     }
     
 

@@ -153,8 +153,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ url('add-new-addon') }}">New AddOn</a>
                                     <a class="nav-link" href="{{ route('all-addon') }}">Available AddOn</a>
-                                    <a class="nav-link" href="{{ url('add-new-warrenty') }}">AddOn Warrenty</a>
-                                    <a class="nav-link" href="{{ route('all-warrenty') }}">Available Warrenty</a>
+                                 
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseService" aria-expanded="false" aria-controls="collapseService">

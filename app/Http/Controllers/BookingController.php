@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use DB;
 class BookingController extends Controller
 {
@@ -54,9 +55,24 @@ class BookingController extends Controller
         $booking->email = $request->email;
         $booking->coupon_code = $request->applied_coupon_code;
         $booking->total_price = $request->total_price;
-    
+
         $booking->save();
-      
+     
+        $response = Http::post('https://hooks.zapier.com/hooks/catch/7959662/bjvfjg4/' ,[
+            "services_title" => $booking->service_type,
+            "services_descriptions" => $booking->device_issue_name ,
+            "services_cost" =>$booking->total_price,
+            "start" =>$booking->date,
+            "consumers_name" =>$booking->name,
+            "consumers_email" =>$booking->email,
+            "consumers_mobile" =>$booking->phone,
+            "consumers_address_zip" => $booking->zip_code,
+            "consumers_address_line1" => $booking->address,
+            "consumers_additionalFields_coupon_code" =>$booking->unit_floor,
+            "add_ons" =>$booking->screen_protector,
+        ]);
+       
+        
     }
 
     /**
@@ -113,5 +129,25 @@ class BookingController extends Controller
         // dd($records);
 
         return view('Admin.booking_list',compact('bookings'));
+    }
+
+    public function test(){
+        $booking = Booking::all()->last();
+      
+        $booked = [
+            "services_title" => $booking->service_type,
+            "services_descriptions" => $booking->device_issue_name ,
+            "services_cost" =>$booking->total_price,
+            "start" =>$booking->date,
+            "consumers_name" =>$booking->name,
+            "consumers_email" =>$booking->email,
+            "consumers_mobile" =>$booking->phone,
+            "consumers_address_zip" => $booking->zip_code,
+            "consumers_address_line1" => $booking->address,
+            "consumers_additionalFields_coupon_code" =>$booking->unit_floor,
+            "add_ons" =>$booking->screen_protector,
+        ];
+        
+        return $booked;
     }
 }

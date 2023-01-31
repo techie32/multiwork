@@ -48,9 +48,18 @@ Route::get('/servicedata/{id}',[ServicesController::class,'show']);
 // coupon 
 Route::get('/couponcode',[CouponCodeController::class,'index']);
 
-Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
+// Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
+Route::middleware(['cors'])->group(function () {
+    Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
+});
+
 Route::get('/timing-slot-pre/{givendate}',[TimeAvailableController::class,'calculatepreviousslot']);
 
+// Route::post('https://hooks.zapier.com/hooks/catch/7959662/bjvfjg4/',[TimeAvailableController::class,'test']);
+Route::post('zapierdata',[TimeAvailableController::class,'test']);
 
-Route::post('https://hooks.zapier.com/hooks/catch/7959662/bjvfjg4/',[TimeAvailableController::class,'test']);
+// Route::get('testing',[TimeAvailableController::class,'test']);
+
+// Route::post('/addpost',[TimeAvailableController::class,'addPost']);
+
 

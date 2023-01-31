@@ -68,15 +68,15 @@ Route::get('addon.edit/{id}',[AddOnController::class,'edit'])->name('addon.edit'
 Route::post('update-addon/{id}',[AddOnController::class,'update'])->name('addon.update');
 
 // warrenty 
-Route::get('/add-new-warrenty', function () {
-    return view('Admin.add_on_warrenty');
-})->middleware(['auth'])->name('add.add_on_warrenty');
+// Route::get('/add-new-warrenty', function () {
+//     return view('Admin.add_on_warrenty');
+// })->middleware(['auth'])->name('add.add_on_warrenty');
 
-Route::post('/insert-warrenty',[WarrentyController::class,'store'])->middleware(['auth']);
-Route::get('/warrenty-list',[WarrentyController::class,'AllWarrenty'])->middleware(['auth'])->name('all-warrenty');
-Route::get('warrenty.delete/{id}',[WarrentyController::class,'destroy'])->name('warrenty.delete');
-Route::get('warrenty.edit/{id}',[WarrentyController::class,'edit'])->name('warrenty.edit');
-Route::post('update-warrenty/{id}',[WarrentyController::class,'update'])->name('warrenty.update');
+// Route::post('/insert-warrenty',[WarrentyController::class,'store'])->middleware(['auth']);
+// Route::get('/warrenty-list',[WarrentyController::class,'AllWarrenty'])->middleware(['auth'])->name('all-warrenty');
+// Route::get('warrenty.delete/{id}',[WarrentyController::class,'destroy'])->name('warrenty.delete');
+// Route::get('warrenty.edit/{id}',[WarrentyController::class,'edit'])->name('warrenty.edit');
+// Route::post('update-warrenty/{id}',[WarrentyController::class,'update'])->name('warrenty.update');
 
 // servicess
 
