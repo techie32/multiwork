@@ -315,19 +315,10 @@ class TimeAvailableController extends Controller
         return view('Admin.time_sch',compact('timing'));
     }
 
-    
-    public function test(){
-        $booking = Booking::all()->last();
-
-
-        
-      
-    
-    }
 
     public function addPost(){
         $res = Http::post('https://reqres.in/api/users',[
-            'name' => 'khan',
+            'name' => 'khaan'. ' ' . 'akia',
             'job' => 'dev'
         ]);
         dd($res->json());

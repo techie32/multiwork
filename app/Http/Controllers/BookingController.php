@@ -59,18 +59,20 @@ class BookingController extends Controller
         $booking->save();
      
         $response = Http::post('https://hooks.zapier.com/hooks/catch/7959662/bjvfjg4/' ,[
-            "services_title" => $booking->service_type,
-            "services_descriptions" => $booking->device_issue_name ,
-            "services_cost" =>$booking->total_price,
-            "start" =>$booking->date,
-            "consumers_name" =>$booking->name,
-            "consumers_email" =>$booking->email,
-            "consumers_mobile" =>$booking->phone,
-            "consumers_address_zip" => $booking->zip_code,
-            "consumers_address_line1" => $booking->address,
-            "consumers_additionalFields_coupon_code" =>$booking->unit_floor,
-            "add_ons" =>$booking->screen_protector,
+            "services_title" => $request->service_type,
+            "services_descriptions" => $request->device_issue_name . ' ' . $request->screen_protector . ' ' . $request->warrenty,
+            "services_cost" =>$request->total_price,
+            "start" =>$request->date,
+            "consumers_name" =>$request->name,
+            "consumers_email" =>$request->email,
+            "consumers_mobile" =>$request->phone,
+            "consumers_address_zip" => $request->zip_code,
+            "consumers_address_line1" => $request->address,
+            "consumers_additionalFields_coupon_code" =>$request->unit_floor . ' ' . $request->applied_coupon_code,
+            "add_ons" =>$request->screen_protector,
         ]);
+
+        dd($response->json());
        
         
     }
@@ -131,23 +133,4 @@ class BookingController extends Controller
         return view('Admin.booking_list',compact('bookings'));
     }
 
-    public function test(){
-        $booking = Booking::all()->last();
-      
-        $booked = [
-            "services_title" => $booking->service_type,
-            "services_descriptions" => $booking->device_issue_name ,
-            "services_cost" =>$booking->total_price,
-            "start" =>$booking->date,
-            "consumers_name" =>$booking->name,
-            "consumers_email" =>$booking->email,
-            "consumers_mobile" =>$booking->phone,
-            "consumers_address_zip" => $booking->zip_code,
-            "consumers_address_line1" => $booking->address,
-            "consumers_additionalFields_coupon_code" =>$booking->unit_floor,
-            "add_ons" =>$booking->screen_protector,
-        ];
-        
-        return $booked;
-    }
 }
