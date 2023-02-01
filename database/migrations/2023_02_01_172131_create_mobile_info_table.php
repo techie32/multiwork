@@ -17,7 +17,13 @@ class CreateMobileInfoTable extends Migration
             $table->id();
             $table->string('mobile_name');
             $table->string('model');
+            $table->string('device_issue_name')->nullable();
             $table->longtext('image'); 
+            $table->string('battery_replacement_price')->nullable();
+            $table->string('screen_replacement_price')->nullable();
+            $table->string('modelcategory')->nullable();
+            $table->string('warrenty_name')->nullable();
+            $table->string('warrenty_price')->nullable();
             $table->timestamps();
         });
     }

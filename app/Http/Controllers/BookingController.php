@@ -36,15 +36,27 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-
+        $addon_data = $request->addon_data;
+        // dd($addon_data);
+        $addon_name;
+        foreach($addon_data  as $key => $value){
+            $addon_name[] = $value['addonName'];
+            $concat = join(",",$addon_name);
+        }
+   
         $booking = new Booking;
+
+        
         $booking->zip_code = $request->zip_code;
+    
         $booking->service_type = $request->service_type;
         $booking->model = $request->model;
         $booking->device_issue_name = $request->device_issue_name;
         $booking->screen_color = $request->screen_color;
         $booking->warrenty = $request->warrenty;
-        $booking->screen_protector = $request->screen_protector;
+
+        $booking->screen_protector = $concat;
+
         $booking->charger_cable = $request->charger_cable;
         $booking->date = $request->date; 
         $booking->time = $request->time;
@@ -55,7 +67,8 @@ class BookingController extends Controller
         $booking->email = $request->email;
         $booking->coupon_code = $request->applied_coupon_code;
         $booking->total_price = $request->total_price;
-
+     
+    
         $booking->save();
      
         $response = Http::post('https://hooks.zapier.com/hooks/catch/7959662/bjvfjg4/' ,[
