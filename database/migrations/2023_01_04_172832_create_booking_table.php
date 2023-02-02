@@ -23,7 +23,7 @@ class CreateBookingTable extends Migration
             $table->string('screen_color')->nullable();
             $table->string('warrenty')->nullable();
             $table->string('screen_protector')->nullable();
-            $table->string('charger_cable')->nullable();
+    
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->string('address')->nullable();

@@ -54,10 +54,7 @@ class BookingController extends Controller
         $booking->device_issue_name = $request->device_issue_name;
         $booking->screen_color = $request->screen_color;
         $booking->warrenty = $request->warrenty;
-
         $booking->screen_protector = $concat;
-
-        $booking->charger_cable = $request->charger_cable;
         $booking->date = $request->date; 
         $booking->time = $request->time;
         $booking->address = $request->address;
