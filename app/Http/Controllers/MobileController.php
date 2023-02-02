@@ -49,7 +49,7 @@ class MobileController extends Controller
         $mobile->warrenty_price =  $request->warrenty_price; 
       
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
-        
+      
         $mobile->save();
         
     
@@ -76,7 +76,15 @@ class MobileController extends Controller
     public function edit($id)
     {
         $mobile = Mobile_info::where('id' ,'=',$id)->first();
-        return view('Admin.edit_mobile',compact('mobile'));
+
+        $img = "data:image/jpg;base64" . $mobile->image;
+ 
+        $img_part = explode(";base64", $img);
+        $img_t = explode("image/", $img_part[0]);
+       
+        $img = base64_decode($img_part[1]);
+    
+        return view('Admin.edit_mobile',compact('mobile','img'));
     }
 
     /**
@@ -88,7 +96,13 @@ class MobileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            dd("success')");
+        }else{
+            dd("failed'");
+        }
 
+        // dd($request->all());
         $mobile = Mobile_info::find($id);
         $mobile->mobile_name = $request->mobile_name;
         $mobile->model = $request->model;
@@ -99,8 +113,8 @@ class MobileController extends Controller
         $mobile->warrenty_name =   $request->warrenty_name;
         $mobile->warrenty_price =  $request->warrenty_price; 
       
-     
         $mobile->image =  base64_encode(file_get_contents($request->file('image')));
+        dd($mobile);
         if($mobile->save())
         {
             return redirect()->route("all-mobile");

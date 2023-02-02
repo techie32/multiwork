@@ -49,18 +49,51 @@
 
                             <div class="form-row ">
                                 <div class="col-md-5 m-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen {{  ($mobile->modelcategory == 'White Screen' ? ' checked' : '') }}" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            White Screen
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Black Screen
-                                        </label>
-                                    </div>
+                                  
+                                    @if($mobile->modelcategory === 'White Screen,Black Screen')
+                                        <div class="form-check">
+                                
+                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen"  checked id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                White Screen
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen"  checked id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Black Screen
+                                            </label>
+                                        </div>
+                                    @endif
+                                            
+                                    @if($mobile->modelcategory === 'Black Screen')
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen"  id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                White Screen
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen"  checked id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Black Screen
+                                            </label>
+                                        </div>
+                                    @endif
+                                    @if($mobile->modelcategory === 'White Screen')
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen"  checked id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                White Screen
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen" id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Black Screen
+                                            </label>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-row ">
@@ -83,7 +116,9 @@
                                 <div class="col-md-5 m-auto">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label small mb-1">Mobile Pic</label>
-                                        <input class="form-control" type="file" name="image" id="formFile" value="{{ $mobile->image}}"  required>
+                                        
+                                        <input class="form-control" type="file" name="image" id="formFile" value="{{ $mobile->image }}"  required>
+                                        <td><img width="50px" height="50px" src= "data:image/jpg;base64,  {{$mobile->image}} "></td>
                                     </div>
                                 </div>
                             </div>

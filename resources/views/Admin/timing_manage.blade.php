@@ -18,10 +18,22 @@
                     <div class="form-group">
                         <select class="form-control select" name="leadtime">
                             @foreach($leadtime as $row)
-                                <!-- <option class="check1" value="{{ $row->lead_time }}">{{ $row->lead_time }}</option> -->
-                                <option class="check1" value="1 hour">1 hour</option>
-                                <option class="check1" value="2 hour">2 hour</option>
-                                <option class="check1" value="3 hour">3 hour</option>
+                                <option class="check1" value="{{ $row->lead_time }}">{{ $row->lead_time }}</option>
+                                @if($row->lead_time == "3 hour"){   
+                                    <option class="check1" value="1 hour">1 hour</option>
+                                    <option class="check1" value="2 hour">2 hour</option>
+                                }@endif
+
+                                @if($row->lead_time == "2 hour"){   
+                                    <option class="check1" value="1 hour">1 hour</option>
+                                    <option class="check1" value="3 hour">3 hour</option>
+                                }@endif
+
+                                @if($row->lead_time == "1 hour"){   
+                                    <option class="check1" value="1 hour">2 hour</option>
+                                    <option class="check1" value="3 hour">3 hour</option>
+                                }@endif
+                                
                             @endforeach
                         </select>
                     </div>
