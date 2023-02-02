@@ -35,8 +35,10 @@
                                 <div class="col-md-5 m-auto">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label Large mb-1">AddOn Pic</label>
-                                        <input class="form-control" type="file" name="image" id="formFile"  required>
-                                        <img width="50px" height="50px" src= "data:image/jpg;base64,  {{$addon->image}} ">
+
+                                        <input class="form-control" type="file" name="image" id="formFile">
+                                        <input class="form-control" type="hidden" name="image" id="formFile" value="{{ $addon->image }}" >
+                                        <img width="130px" height="100px" src= "data:image/jpg;base64,  {{$addon->image}} ">
                                     </div>
                                 </div>
                             </div>

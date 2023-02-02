@@ -53,13 +53,13 @@
                                     @if($mobile->modelcategory === 'White Screen,Black Screen')
                                         <div class="form-check">
                                 
-                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen"  checked id="flexCheckChecked">
+                                            <input class="form-check-input checkboxes" type="checkbox" name="modelcategory[]" value="White Screen" required  checked id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 White Screen
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen"  checked id="flexCheckChecked">
+                                            <input class="form-check-input checkboxes" type="checkbox" name="modelcategory[]" value="Black Screen" required  checked id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Black Screen
                                             </label>
@@ -68,13 +68,13 @@
                                             
                                     @if($mobile->modelcategory === 'Black Screen')
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen"  id="flexCheckChecked">
+                                            <input class="form-check-input checkboxes" type="checkbox" name="modelcategory[]" value="White Screen" required  id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 White Screen
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen"  checked id="flexCheckChecked">
+                                            <input class="form-check-input checkboxes" type="checkbox" name="modelcategory[]" value="Black Screen" required  checked id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Black Screen
                                             </label>
@@ -82,18 +82,20 @@
                                     @endif
                                     @if($mobile->modelcategory === 'White Screen')
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="White Screen"  checked id="flexCheckChecked">
+                                            <input class="form-check-input checkboxes" type="checkbox" name="modelcategory[]" value="White Screen" required  checked id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 White Screen
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="modelcategory[]" value="Black Screen" id="flexCheckChecked">
+                                            <input class="form-check-input checkboxes" type="checkbox" name="modelcategory[]" value="Black Screen" required id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Black Screen
                                             </label>
                                         </div>
                                     @endif
+
+                                
                                 </div>
                             </div>
                             <div class="form-row ">
@@ -116,9 +118,10 @@
                                 <div class="col-md-5 m-auto">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label small mb-1">Mobile Pic</label>
-                                        
-                                        <input class="form-control" type="file" name="image" id="formFile" value="{{ $mobile->image }}"  required>
-                                        <td><img width="50px" height="50px" src= "data:image/jpg;base64,  {{$mobile->image}} "></td>
+                                        <input class="form-control" type="file" name="image" id="formFile">
+                                        <input class="form-control" type="hidden" name="image" id="formFile" value="{{ $mobile->image }}" >
+                                       
+                                        <img width="130px" height="100px" src= "data:image/jpg;base64,  {{$mobile->image}} ">
                                     </div>
                                 </div>
                             </div>
@@ -130,5 +133,29 @@
         </div>
     </div>
 </main>
-
+<!-- <script>
+$(document).ready(function(){
+    $('button').on('click', function() {
+        var checkoutHistory =  $('#flexCheckChecked').val();
+        alert(checkoutHistory);
+        if (!(checkoutHistory.checked)) {
+            alert("You have elected to show your checkout history.");
+        } 
+    });
+});   
+   
+</script> -->
+<script type="text/javascript">
+$(document).ready(function(){
+    var checkboxes = $('.checkboxes');
+    // checkboxes.change(function(){
+        if($('.checkboxes:checked').length>0) {
+            checkboxes.removeAttr('required');
+        }if(!($('.checkboxes:checked'))){
+            alert("dsfakl'");
+            checkboxes.attr('required', 'required');
+        }
+    // });
+});
+</script>
 @endsection

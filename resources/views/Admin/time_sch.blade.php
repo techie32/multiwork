@@ -213,11 +213,11 @@ let result = timing.map((v, i) => `<div class='form-group' style='display:flex' 
                                             <div id='range'></div>
                                             <label style=''>
                                                
-                                                <input value='${v.start_time}' id='start_time' type='time' step='3600000' name='start_time[]' mbsc-input placeholder='Please select...' />
+                                                <input value='${v.start_time}' id='start_time' type='time' name='start_time[]' mbsc-input placeholder='Please select...' />
                                             </label>  
                                             <label>
                                           
-                                                <input value='${v.end_time}' id='end_time'   type='time' name='end_time[]'  step='3600000'   mbsc-input placeholder='Please select...' />
+                                                <input value='${v.end_time}' id='end_time'   type='time' name='end_time[]'    mbsc-input placeholder='Please select...' />
                                             </label>
                                             </div>
                                         </div>

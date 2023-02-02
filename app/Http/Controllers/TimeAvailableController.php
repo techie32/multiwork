@@ -156,7 +156,6 @@ class TimeAvailableController extends Controller
         foreach($availableDays as $key => $value){
             $daysInAvailableDays[] = $value->day_name;
         }
-    
 
         $changeformat = $givendate;
         
@@ -168,11 +167,12 @@ class TimeAvailableController extends Controller
         $daysWithSlots = [];
         $index = 0;
         while(count($daysWithSlots) < 7) {
-
-
             $current_time = carbon::now();
-            $created_at = $current_time->format("H:i");
-
+           
+            $time_modify = $current_time->modify('+1 hour');
+           
+            $created_at = $time_modify->format("H:i");
+           
             if (in_array($weekDays[$date->format('w')], $daysInAvailableDays))
             {
             
@@ -195,7 +195,6 @@ class TimeAvailableController extends Controller
                     }else{
                         array_push($slots,$item->format("h:i A"));
                     }
-                        
                 } 
                    
 
@@ -224,7 +223,7 @@ class TimeAvailableController extends Controller
             $date->modify('+1 day');
             $index = $index+1;
         }
-     
+        dd($daysWithSlots);
         return $daysWithSlots;
         
        
@@ -253,7 +252,8 @@ class TimeAvailableController extends Controller
         $daysWithSlots = [];
         while (count($daysWithSlots) < 7) {
             $current_time = carbon::now();
-            $created_at = $current_time->format("H:i");
+            $time_modify = $current_time->modify('+1 hour');
+            $created_at = $time_modify->format("H:i");
             
             if (in_array($weekDays[$date->format('w')], $daysInAvailableDays)) {
 
@@ -303,8 +303,8 @@ class TimeAvailableController extends Controller
                 
             }
             $date->modify('-1 day');
-            $index ++;
-        
+            $index = $index+1;
+    
         }
         return $daysWithSlots;
        

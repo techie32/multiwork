@@ -24,8 +24,9 @@
                                 <div class="col-md-5 m-auto">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label Large mb-1">Service Pic</label>
-                                        <input class="form-control" type="file" name="image" id="formFile" required>
-                                        <img width="50px" height="50px" src= "data:image/jpg;base64,  {{$service->image}} ">
+                                        <input class="form-control" type="file" name="image" id="formFile">
+                                        <input class="form-control" type="hidden" name="image" id="formFile" value="{{ $service->image }}" >
+                                        <img width="130px" height="100px" src= "data:image/jpg;base64,  {{$service->image}} ">
                                     </div>
                                 </div>
                             </div>

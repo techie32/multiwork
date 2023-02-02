@@ -76,7 +76,14 @@ class ServicesController extends Controller
     {
         $service = Services::find($id);
         $service->service_name = $request->service_name;
-        $service->image =  base64_encode(file_get_contents($request->file('image')));
+        
+        
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $service->image =  base64_encode(file_get_contents($request->file('image')));
+        }else{
+            $service->image =  $request->image; 
+        }
+    
         if($service->save())
         {
             return redirect()->route("all-service");

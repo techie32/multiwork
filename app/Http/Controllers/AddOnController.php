@@ -38,7 +38,6 @@ class AddOnController extends Controller
         $addon->addon_name = $request->addon_name;
         $addon->price = $request->price;
         $addon->image =  base64_encode(file_get_contents($request->file('image')));
- 
         $addon->save();
     
         return Redirect()->route('all-addon');
@@ -79,7 +78,11 @@ class AddOnController extends Controller
         $addon = AddOn::find($id);
         $addon->addon_name = $request->addon_name;
         $addon->price = $request->price;
-        $addon->image =  base64_encode(file_get_contents($request->file('image')));
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $addon->image =  base64_encode(file_get_contents($request->file('image')));
+        }else{
+            $addon->image =  $request->image; 
+        }
         if($addon->save())
         {
             return redirect()->route("all-addon");
@@ -88,7 +91,6 @@ class AddOnController extends Controller
         {
             return redirect()->back()->with(['msg' => 2]);
         }
-
         return view('addon.edit',compact('addon'));
     }
 
