@@ -48,10 +48,8 @@ Route::get('/servicedata/{id}',[ServicesController::class,'show']);
 // coupon 
 Route::get('/couponcode',[CouponCodeController::class,'index']);
 
-// Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
-Route::middleware(['cors'])->group(function () {
-    Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
-});
+Route::get('/timing-slot/{givendate}',[TimeAvailableController::class,'calculatenextslot']);
+
 
 Route::get('/timing-slot-pre/{givendate}',[TimeAvailableController::class,'calculatepreviousslot']);
 
